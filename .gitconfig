@@ -1,0 +1,26 @@
+[user]
+	name = sciencesakura
+	email = sakurasakurascience@gmail.com
+[core]
+	autocrlf = false
+	excludesfile = ~/.gitignore_global
+	quotepath = false
+[color]
+	ui = auto
+[push]
+	default = nothing
+[alias]
+	aa = add .
+	ad = add
+	br = branch
+	ci = commit
+	co = checkout
+	di = diff
+	lo = log
+	lp = log -p
+	me = merge
+	pl = pull
+	ps = push
+	rs = reset
+	rv = revert
+	sw = switch

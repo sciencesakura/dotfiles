@@ -1,0 +1,179 @@
+set autoread
+set belloff=all
+set cinoptions+=:0
+set clipboard=unnamed
+set cursorline
+set encoding=utf8
+set expandtab
+set hlsearch
+set ignorecase
+set incsearch
+set laststatus=2
+set noswapfile
+set nowrap
+set number
+set ruler
+set shiftwidth=2
+set showmatch
+set smartcase
+set smartindent
+set spelllang=en,cjk
+set splitbelow
+set tabstop=2
+set termguicolors
+set termwinsize=16x0
+set wrapscan
+if has('mouse')
+  set mouse=a
+endif
+
+filetype plugin indent on
+syntax enable
+colorscheme iceberg
+
+let g:c_syntax_for_h = 1
+
+if $TERM !~ '^xterm'
+  let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+  let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+endif
+
+" asyncomplete.vim
+augroup _ag_asyncomplete
+  autocmd!
+  autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+        \'name': 'file',
+        \'completor': function('asyncomplete#sources#file#completor'),
+        \'whitelist': ['*']
+        \}))
+augroup END
+" caw.vim
+let g:caw_no_default_keymappings = 1
+" emmet-vim
+let g:user_emmet_settings = {
+      \'html': {
+      \ 'snippets': {
+      \   'html:5': "<!DOCTYPE html>\n"
+      \     . "<html>\n"
+      \     . "\t<head>\n"
+      \     . "\t\t<meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n"
+      \     . "\t\t<title>|</title>\n"
+      \     . "\t</head>\n"
+      \     . "\t<body>\n"
+      \     . "\t${child}\n"
+      \     . "\t</body>\n"
+      \     . "</html>"
+      \ }
+      \},
+      \'javascript': {
+      \ 'extends': 'jsx'
+      \},
+      \'jsp': {
+      \ 'extends': 'html'
+      \},
+      \'typescript': {
+      \ 'extends': 'tsx'
+      \},
+      \'xml': {
+      \ 'snippets': {
+      \   '!': 'xml:1',
+      \   'xml:1': "<?xml version=\"1.0\" encoding=\"${charset}\"?>\n${child}"
+      \ }
+      \}
+      \}
+" NERDTree
+let g:NERDTreeIgnore = ['^\.DS_Store$', '^\.git$', '^Thumbs.db$', '\.class$', '\.o$', '\.swp$']
+let g:NERDTreeShowHidden = 1
+" nerdtree-git-plugin
+let g:NERDTreeGitStatusUseNerdFonts = 1
+" previm
+let g:previm_open_cmd = 'open'
+let g:previm_show_header = 0
+" vim-airline
+let g:airline_powerline_fonts = 1
+" vim-clang-format
+let g:clang_format#code_style = 'WebKit'
+let g:clang_format#style_options = {
+      \'AlignConsecutiveMacros': 'true',
+      \'AlignAfterOpenBracket': 'Align',
+      \'AllowShortBlocksOnASingleLine': 'Empty',
+      \'AllowShortFunctionsOnASingleLine': 'None',
+      \'BinPackArguments': 'false',
+      \'ColumnLimit': 100,
+      \'PointerAlignment': 'Right'
+      \}
+" vim-lsp
+let g:lsp_diagnostics_echo_cursor = 1
+" let g:lsp_log_file = expand('$HOME/vim-lsp.log')
+let g:lsp_signs_error = {'text': ''}
+let g:lsp_signs_hint = {'text': 'ﯦ'}
+let g:lsp_signs_information = {'text': ''}
+let g:lsp_signs_warning = {'text': ''}
+augroup _ag_vim_lsp
+  autocmd!
+  if executable('bash-language-server')
+    autocmd User lsp_setup call lsp#register_server({
+          \'name': 'bash-language-server',
+          \'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
+          \'whitelist': ['sh']
+          \})
+  endif
+  if executable('cquery')
+    autocmd User lsp_setup call lsp#register_server({
+          \'name': 'cquery',
+          \'cmd': {server_info->['cquery']},
+          \'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+          \'initialization_options': {'cacheDirectory': '/tmp/cquery/cache'},
+          \'whitelist': ['c', 'cpp']
+          \})
+  endif
+  if executable('docker-langserver')
+    autocmd User lsp_setup call lsp#register_server({
+          \'name': 'docker-langserver',
+          \'cmd': {server_info->[&shell, &shellcmdflag, 'docker-langserver --stdio']},
+          \'whitelist': ['dockerfile']
+          \})
+  endif
+  if executable('java') && filereadable(expand('$HOME/lsp/groovy-language-server/groovy-language-server-all.jar'))
+    autocmd User lsp_setup call lsp#register_server({
+          \'name': 'groovy-language-server',
+          \'cmd': {server_info->['java', '-jar', expand('$HOME/lsp/groovy-language-server/groovy-language-server-all.jar')]},
+          \'whitelist': ['groovy']
+          \})
+  endif
+  if executable(expand('$HOME/lsp/kotlin-language-server/server/bin/kotlin-language-server'))
+    autocmd User lsp_setup call lsp#register_server({
+          \'name': 'kotlin-language-server',
+          \'cmd': {server_info->[&shell, &shellcmdflag, expand('$HOME/lsp/kotlin-language-server/server/bin/kotlin-language-server')]},
+          \'whitelist': ['kotlin']
+          \})
+  endif
+  if executable('typescript-language-server')
+    autocmd User lsp_setup call lsp#register_server({
+          \'name': 'typescript-language-server',
+          \'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+          \'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+          \'whitelist': ['typescript', 'typescriptreact']
+          \})
+  endif
+augroup END
+
+" general
+nnoremap <silent> <Esc><Esc> :nohlsearch<LF>
+nnoremap <silent> tt :tabnew<CR>
+nnoremap <silent> th :tabprevious<CR>
+nnoremap <silent> tl :tabnext<CR>
+nnoremap <silent> tm :terminal<CR>
+" caw.vim
+nmap <silent> gcc <Plug>(caw:hatpos:toggle)
+xmap <silent> gcc <Plug>(caw:hatpos:toggle)
+nmap <silent> gcw <Plug>(caw:wrap:toggle)
+xmap <silent> gcw <Plug>(caw:wrap:toggle)
+" NERDTree
+nnoremap <silent> <C-n> :NERDTreeToggle<CR>
+" vim-clang-format
+nnoremap <silent> cf :ClangFormat<CR>
+" vim-lsp
+nnoremap <silent> <C-h> :LspPreviousError<CR>
+nnoremap <silent> <C-l> :LspNextError<CR>
+nnoremap <silent> <F2> :LspRename<CR>
