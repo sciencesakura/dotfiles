@@ -36,4 +36,6 @@ if [[ -d ~/.nodebrew ]]; then
   __pushpath $NODEBREW_ROOT/current/bin
 fi
 
+__pushpath ~/bin
+
 unset -f __pushpath
