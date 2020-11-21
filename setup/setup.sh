@@ -23,8 +23,14 @@ else
   __mkdirifnotexist "$HOME/.config"
   ln -s "$(realpath "$curdir/../.config/git")" "$HOME/.config/"
 fi
+# .vim
+__mkdirifnotexist "$HOME/.vim"
+for e in $(ls "$curdir/../.vim"); do
+  __rmifexist "$HOME/.vim/$e"
+  ln -s "$(realpath "$curdir/../.vim/$e")" "$HOME/.vim/"
+done
 # others
-for e in .vim bin .bash_profile .bashrc .inputrc .npmrc .tmux.conf .vimrc; do
+for e in bin .bash_profile .bashrc .inputrc .npmrc .tmux.conf; do
   __rmifexist "$HOME/$e"
   ln -s "$(realpath "$curdir/../$e")" "$HOME/"
 done
