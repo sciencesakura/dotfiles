@@ -9,6 +9,9 @@ set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
+if has('mouse')
+  set mouse=a
+endif
 set noswapfile
 set nowrap
 set number
@@ -20,12 +23,11 @@ set smartindent
 set spelllang=en,cjk
 set splitbelow
 set tabstop=2
-set termguicolors
+if $COLORTERM == 'truecolor'
+  set termguicolors
+endif
 set termwinsize=16x0
 set wrapscan
-if has('mouse')
-  set mouse=a
-endif
 
 filetype plugin indent on
 syntax enable
