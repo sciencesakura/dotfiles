@@ -3,10 +3,7 @@
 	email = sakurasakurascience@gmail.com
 [core]
 	autocrlf = false
-	excludesfile = ~/.gitignore_global
 	quotepath = false
-[color]
-	ui = auto
 [push]
 	default = nothing
 [alias]
@@ -16,11 +13,15 @@
 	ci = commit
 	co = checkout
 	di = diff
+	fe = fetch
 	lo = log
 	lp = log -p
 	me = merge
 	pl = pull
 	ps = push
-	rs = reset
+	rb = rebase
+	rs = restore
+	rt = reset
 	rv = revert
+	sc = sparse-checkout
 	sw = switch
