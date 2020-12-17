@@ -23,6 +23,9 @@ else
   __mkdirifnotexist "$HOME/.config"
   ln -s "$(realpath "$curdir/../.config/git")" "$HOME/.config/"
 fi
+# .ssh/config
+__mkdirifnotexist "$HOME/.ssh"
+ln -s "$(realpath "$curdir/../.ssh/config")" "$HOME/.ssh/"
 # .vim
 __mkdirifnotexist "$HOME/.vim"
 for e in $(ls "$curdir/../.vim"); do
