@@ -53,6 +53,16 @@ augroup END
 let g:caw_no_default_keymappings = 1
 " emmet-vim
 let g:user_emmet_settings = {
+      \'c': {
+      \ 'snippets': {
+      \   '!': "#include <stdlib.h>\n"
+      \     . "\n"
+      \     . "int main(int argc, char *argv[])\n"
+      \     . "{\n"
+      \     . "\treturn EXIT_SUCCESS;\n"
+      \     . "}"
+      \ }
+      \},
       \'html': {
       \ 'snippets': {
       \   'html:5': "<!DOCTYPE html>\n"
