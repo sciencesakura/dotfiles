@@ -12,6 +12,7 @@ core:gnupg
 core:grep
 core:jq
 core:ninja
+core:nkf
 core:nodebrew
 core:p7zip
 core:qt
