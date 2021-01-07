@@ -14,15 +14,14 @@ __rmifexist() {
 curl -s https://get.sdkman.io | /bin/bash
 
 # create symlink for dotfiles
-# .config/git
-if [ -n "$XDG_CONFIG_HOME" ]; then
-  __rmifexist "$XDG_CONFIG_HOME/git"
-  ln -s "$(realpath "$curdir/../.config/git")" "$XDG_CONFIG_HOME/"
-else
-  __rmifexist "$HOME/.config/git"
-  __mkdirifnotexist "$HOME/.config"
-  ln -s "$(realpath "$curdir/../.config/git")" "$HOME/.config/"
+# .config
+if [ -z "$XDG_CONFIG_HOME" ]; then
+  XDG_CONFIG_HOME="$HOME/.config"
 fi
+for e in git tmux; do
+  __rmifexist "$XDG_CONFIG_HOME/$e"
+  ln -s "$(realpath "$curdir/../.config/$e")" "$XDG_CONFIG_HOME/"
+done
 # .ssh/config
 __mkdirifnotexist "$HOME/.ssh"
 ln -s "$(realpath "$curdir/../.ssh/config")" "$HOME/.ssh/"
@@ -33,7 +32,7 @@ for e in $(ls "$curdir/../.vim"); do
   ln -s "$(realpath "$curdir/../.vim/$e")" "$HOME/.vim/"
 done
 # others
-for e in bin .bash_profile .bashrc .inputrc .npmrc .tmux.conf; do
+for e in bin .bash_profile .bashrc .inputrc .npmrc; do
   __rmifexist "$HOME/$e"
   ln -s "$(realpath "$curdir/../$e")" "$HOME/"
 done
