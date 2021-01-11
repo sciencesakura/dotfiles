@@ -17,6 +17,7 @@ core:nodebrew
 core:p7zip
 core:qt
 core:rename
+core:telnet
 core:tmux
 core:tree
 core:vim
