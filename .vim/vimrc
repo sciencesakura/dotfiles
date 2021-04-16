@@ -20,7 +20,9 @@ set shiftwidth=2
 set showmatch
 set smartcase
 set smartindent
+set spell
 set spelllang=en,cjk
+set spelloptions=camel
 set splitbelow
 set tabstop=2
 if $COLORTERM == 'truecolor'

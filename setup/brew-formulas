@@ -21,6 +21,7 @@ core:telnet
 core:tmux
 core:tree
 core:vim
+core:yq
 cask:android-studio
 cask:docker
 cask:firefox
