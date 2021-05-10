@@ -5,7 +5,7 @@
 	autocrlf = false
 	quotepath = false
 [push]
-	default = nothing
+	default = simple
 [alias]
 	aa = add .
 	ad = add
