@@ -21,3 +21,11 @@ mkcd() {
 path() {
   printf "$PATH\n" | tr ":" "\n"
 }
+
+pdfview() {
+  if [[ -z $1 ]]; then
+    nohup evince &> /dev/null &
+  else
+    nohup evince "$1" &> /dev/null &
+  fi
+}
