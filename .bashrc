@@ -29,3 +29,15 @@ pdfview() {
     nohup evince "$1" &> /dev/null &
   fi
 }
+
+ticks() {
+  if [[ $1 = "-r" ]]; then
+    local tticks="${2:?}"
+    local epoc=$(((tticks - 621355968000000000) / 10000000))
+    date -u -d "@$epoc" +%FT%T
+  else
+    local epoc=`date -u -d "${1:-now}" +%s`
+    local tticks=$((epoc * 10000000 + 621355968000000000))
+    printf "$tticks\n"
+  fi
+}
