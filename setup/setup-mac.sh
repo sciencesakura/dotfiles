@@ -10,8 +10,8 @@ while read e; do
   case "$repo" in
     core)
       brew install "$form";;
-    *)
-      brew "$repo" install "$form";;
+    cask)
+      brew install --cask "$form";;
   esac
 done < "$curdir/brew-formulas"
 

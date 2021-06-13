@@ -23,6 +23,7 @@ core:tree
 core:vim
 core:yq
 cask:android-studio
+cask:deepl
 cask:docker
 cask:firefox
 cask:font-firacode-nerd-font
