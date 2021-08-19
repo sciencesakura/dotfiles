@@ -98,6 +98,7 @@ let g:user_emmet_settings = {
 " NERDTree
 let g:NERDTreeIgnore = ['^\.DS_Store$', '^\.git$', '^Thumbs.db$', '\.class$', '\.o$', '\.swp$']
 let g:NERDTreeShowHidden = 1
+let g:NERDTreeWinSize = 42
 " nerdtree-git-plugin
 let g:NERDTreeGitStatusUseNerdFonts = 1
 " previm
