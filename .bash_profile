@@ -1,16 +1,35 @@
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-__pushpath() {
-  local entry="$1"
-  [[ -d $entry ]] || return
-  local TMPIFS="$IFS" newpath i
-  IFS=':'
-  for i in $PATH; do
-    [[ $i != $entry ]] && newpath="$newpath:$i"
+declare -a __pathary
+declare -A __pathset
+
+__init_path() {
+  local TMPIFS="$IFS" index=0 entry
+  IFS=:
+  for entry in $PATH; do
+    __pathary[$index]="$entry"
+    __pathset["$entry"]=$((index++))
   done
-  export PATH="${entry}${newpath}"
   IFS="$TMPIFS"
 }
+
+__put_path() {
+  local entry="$1"
+  [[ -n ${__pathset["$entry"]} ]] && return
+  local next=${#__pathary[@]}
+  __pathary[$next]="$entry"
+  __pathset["$entry"]=$next
+}
+
+__export_path() {
+  local TMPPATH item
+  for item in "${__pathary[@]}"; do
+    TMPPATH="$TMPPATH:$item"
+  done
+  export PATH="${TMPPATH:1}"
+}
+
+__init_path
 
 export EDITOR=vim
 export HISTCONTROL=ignoreboth
@@ -24,18 +43,21 @@ export PS1="\[\e[33m\]\u\[\e[0m\]@\[\e[32m\]\h\[\e[0m\] \[\e[36m\]\w\[\e[0m\]\$ 
 
 case "$(uname)" in
   Darwin)
-    __pushpath /usr/local/opt/coreutils/libexec/gnubin
-    __pushpath /usr/local/opt/findutils/libexec/gnubin
-    __pushpath /usr/local/opt/gnu-sed/libexec/gnubin
-    __pushpath /usr/local/opt/grep/libexec/gnubin
+    __put_path /usr/local/opt/coreutils/libexec/gnubin
+    __put_path /usr/local/opt/findutils/libexec/gnubin
+    __put_path /usr/local/opt/gnu-sed/libexec/gnubin
+    __put_path /usr/local/opt/grep/libexec/gnubin
     ;;
 esac
 
 if [[ -d ~/.nodebrew ]]; then
   export NODEBREW_ROOT=~/.nodebrew
-  __pushpath $NODEBREW_ROOT/current/bin
+  __put_path "$NODEBREW_ROOT/current/bin"
 fi
 
-__pushpath ~/bin
+__put_path ~/bin
 
-unset -f __pushpath
+__export_path
+
+unset -f __init_path __put_path __export_path
+unset -n __pathary __pathset
