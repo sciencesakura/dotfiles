@@ -3,16 +3,6 @@
 declare -a __pathary
 declare -A __pathset
 
-__init_path() {
-  local TMPIFS="$IFS" index=0 entry
-  IFS=:
-  for entry in $PATH; do
-    __pathary[$index]="$entry"
-    __pathset["$entry"]=$((index++))
-  done
-  IFS="$TMPIFS"
-}
-
 __put_path() {
   local entry="$1"
   [[ -n ${__pathset["$entry"]} ]] && return
@@ -22,14 +12,14 @@ __put_path() {
 }
 
 __export_path() {
-  local TMPPATH item
-  for item in "${__pathary[@]}"; do
-    TMPPATH="$TMPPATH:$item"
+  local TMPIFS="$IFS" entry
+  IFS=:
+  for entry in $PATH; do
+    __put_path "$entry"
   done
-  export PATH="${TMPPATH:1}"
+  export PATH="${__pathary[*]}"
+  IFS="$TMPIFS"
 }
-
-__init_path
 
 export EDITOR=vim
 export HISTCONTROL=ignoreboth
@@ -40,6 +30,8 @@ export HISTTIMEFORMAT='%F %T '
 export LANG=en_US
 export PROMPT_DIRTRIM=4
 export PS1="\[\e[33m\]\u\[\e[0m\]@\[\e[32m\]\h\[\e[0m\] \[\e[36m\]\w\[\e[0m\]\$ "
+
+__put_path ~/bin
 
 case "$(uname)" in
   Darwin)
@@ -55,9 +47,7 @@ if [[ -d ~/.nodebrew ]]; then
   __put_path "$NODEBREW_ROOT/current/bin"
 fi
 
-__put_path ~/bin
-
 __export_path
 
-unset -f __init_path __put_path __export_path
+unset -f __put_path __export_path
 unset -n __pathary __pathset
