@@ -1,6 +1,11 @@
 [[ "$-" != *i* ]] && return
 
-[[ -f ~/.sdkman/bin/sdkman-init.sh ]] && . ~/.sdkman/bin/sdkman-init.sh
+__source_if_readable() {
+  [[ -r $1 ]] && . "$1"
+}
+
+__source_if_readable /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
+__source_if_readable ~/.sdkman/bin/sdkman-init.sh
 
 alias q='exit'
 alias ls='ls --color=auto'
@@ -33,3 +38,5 @@ ticks() {
     printf "$tticks\n"
   fi
 }
+
+unset -f __source_if_readable
