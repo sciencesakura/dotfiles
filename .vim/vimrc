@@ -47,8 +47,8 @@ augroup _ag_asyncomplete
   autocmd!
   autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
         \'name': 'file',
+        \'allowlist': ['*'],
         \'completor': function('asyncomplete#sources#file#completor'),
-        \'whitelist': ['*']
         \}))
 augroup END
 " caw.vim
@@ -132,7 +132,7 @@ augroup _ag_vim_lsp
     autocmd User lsp_setup call lsp#register_server({
           \'name': 'bash-language-server',
           \'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
-          \'whitelist': ['sh']
+          \'allowlist': ['sh']
           \})
   endif
   if executable('cquery')
@@ -141,28 +141,35 @@ augroup _ag_vim_lsp
           \'cmd': {server_info->['cquery']},
           \'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
           \'initialization_options': {'cacheDirectory': '/tmp/cquery/cache'},
-          \'whitelist': ['c', 'cpp']
+          \'allowlist': ['c', 'cpp']
           \})
   endif
   if executable('docker-langserver')
     autocmd User lsp_setup call lsp#register_server({
           \'name': 'docker-langserver',
           \'cmd': {server_info->[&shell, &shellcmdflag, 'docker-langserver --stdio']},
-          \'whitelist': ['dockerfile']
+          \'allowlist': ['dockerfile']
           \})
   endif
-  if executable('java') && filereadable(expand('$HOME/lsp/groovy-language-server/groovy-language-server-all.jar'))
+  if executable('java') && filereadable(expand('$HOME/.lsp/groovy-language-server/groovy-language-server-all.jar'))
     autocmd User lsp_setup call lsp#register_server({
           \'name': 'groovy-language-server',
-          \'cmd': {server_info->['java', '-jar', expand('$HOME/lsp/groovy-language-server/groovy-language-server-all.jar')]},
-          \'whitelist': ['groovy']
+          \'cmd': {server_info->['java', '-jar', expand('$HOME/.lsp/groovy-language-server/groovy-language-server-all.jar')]},
+          \'allowlist': ['groovy']
           \})
   endif
-  if executable(expand('$HOME/lsp/kotlin-language-server/server/bin/kotlin-language-server'))
+  if executable(expand('$HOME/.lsp/kotlin-language-server/server/bin/kotlin-language-server'))
     autocmd User lsp_setup call lsp#register_server({
           \'name': 'kotlin-language-server',
-          \'cmd': {server_info->[&shell, &shellcmdflag, expand('$HOME/lsp/kotlin-language-server/server/bin/kotlin-language-server')]},
-          \'whitelist': ['kotlin']
+          \'cmd': {server_info->[&shell, &shellcmdflag, expand('$HOME/.lsp/kotlin-language-server/server/bin/kotlin-language-server')]},
+          \'allowlist': ['kotlin']
+          \})
+  endif
+  if executable(expand('$HOME/.lsp/texlab'))
+    autocmd User lsp_setup call lsp#register_server({
+          \'name': 'texlab',
+          \'cmd': {server_info->[expand('$HOME/.lsp/texlab')]},
+          \'allowlist': ['tex']
           \})
   endif
   if executable('typescript-language-server')
@@ -170,7 +177,7 @@ augroup _ag_vim_lsp
           \'name': 'typescript-language-server',
           \'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
           \'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-          \'whitelist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact']
+          \'allowlist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact']
           \})
   endif
 augroup END
