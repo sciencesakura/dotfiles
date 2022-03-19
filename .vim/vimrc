@@ -1,189 +1,102 @@
-set autoread
+set autoindent
 set belloff=all
-set cinoptions+=:0
-set clipboard=unnamed
-set cursorline
-set encoding=utf8
+set encoding=utf-8
 set expandtab
-set hlsearch
 set ignorecase
-set incsearch
 set laststatus=2
+set number
+set shiftwidth=2
+set smartcase
+set splitbelow
+set tabstop=2
+set termwinsize=16x0
+if has('clipboard')
+  set clipboard=unnamed
+endif
+if has('cmdline_info')
+  set ruler
+endif
+if has('extra_search')
+  set hlsearch
+  set incsearch
+endif
 if has('mouse')
   set mouse=a
 endif
-set noswapfile
-set nowrap
-set number
-set ruler
-set shiftwidth=2
-set showmatch
-set smartcase
-set smartindent
-set spell
-set spelllang=en,cjk
-set spelloptions=camel
-set splitbelow
-set tabstop=2
-if $COLORTERM == 'truecolor'
+if has('smartindent')
+  set smartindent
+endif
+if has('syntax')
+  set cursorline
+  set spell
+  set spelllang=en,cjk
+  set spelloptions=camel
+endif
+if has('termguicolors') && $COLORTERM == 'truecolor'
   set termguicolors
 endif
-set termwinsize=16x0
-set wrapscan
 
-filetype plugin indent on
-syntax enable
-colorscheme iceberg
-
-let g:c_syntax_for_h = 1
+filetype on
+filetype indent on
+filetype plugin on
 
 if $TERM !~ '^xterm'
   let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
   let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
 endif
 
-" asyncomplete.vim
-augroup _ag_asyncomplete
-  autocmd!
-  autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-        \'name': 'file',
-        \'allowlist': ['*'],
-        \'completor': function('asyncomplete#sources#file#completor'),
-        \}))
-augroup END
+if &t_Co > 1
+  syntax enable
+	colorscheme iceberg
+endif
+
 " caw.vim
 let g:caw_no_default_keymappings = 1
-" emmet-vim
-let g:user_emmet_settings = {
-      \'c': {
-      \ 'snippets': {
-      \   '!': "#include <stdlib.h>\n"
-      \     . "\n"
-      \     . "int main(int argc, char *argv[])\n"
-      \     . "{\n"
-      \     . "\treturn EXIT_SUCCESS;\n"
-      \     . "}"
-      \ }
-      \},
-      \'html': {
-      \ 'snippets': {
-      \   'html:5': "<!DOCTYPE html>\n"
-      \     . "<html>\n"
-      \     . "\t<head>\n"
-      \     . "\t\t<meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n"
-      \     . "\t\t<title>|</title>\n"
-      \     . "\t</head>\n"
-      \     . "\t<body>\n"
-      \     . "\t${child}\n"
-      \     . "\t</body>\n"
-      \     . "</html>"
-      \ }
-      \},
-      \'javascript': {
-      \ 'extends': 'jsx'
-      \},
-      \'jsp': {
-      \ 'extends': 'html'
-      \},
-      \'typescript': {
-      \ 'extends': 'tsx'
-      \},
-      \'xml': {
-      \ 'snippets': {
-      \   '!': 'xml:1',
-      \   'xml:1': "<?xml version=\"1.0\" encoding=\"${charset}\"?>\n${child}"
-      \ }
-      \}
-      \}
 " NERDTree
-let g:NERDTreeIgnore = ['^\.DS_Store$', '^\.git$', '^Thumbs.db$', '\.class$', '\.o$', '\.swp$']
-let g:NERDTreeShowHidden = 1
+let g:NERDTreeIgnore = ['^\.DS_Store$', '^\.git', '^Thumbs.db$', '\.swp$']
 let g:NERDTreeWinSize = 42
 " nerdtree-git-plugin
 let g:NERDTreeGitStatusUseNerdFonts = 1
-" previm
-let g:previm_open_cmd = 'open'
-let g:previm_enable_realtime = 1
-let g:previm_show_header = 0
 " vim-airline
 let g:airline_powerline_fonts = 1
-" vim-clang-format
-let g:clang_format#code_style = 'WebKit'
-let g:clang_format#style_options = {
-      \'AlignConsecutiveMacros': 'true',
-      \'AlignAfterOpenBracket': 'Align',
-      \'AllowShortBlocksOnASingleLine': 'Empty',
-      \'AllowShortFunctionsOnASingleLine': 'None',
-      \'BinPackArguments': 'false',
-      \'ColumnLimit': 100,
-      \'PointerAlignment': 'Right'
-      \}
+let g:airline#extensions#tabline#enabled = 1
+
 " vim-lsp
-let g:lsp_diagnostics_echo_cursor = 1
-" let g:lsp_log_file = expand('$HOME/vim-lsp.log')
+if has('popupwin')
+  let g:lsp_diagnostics_float_cursor = 1
+else
+  let g:lsp_diagnostics_echo_cursor = 1
+endif
 let g:lsp_diagnostics_signs_error = {'text': ''}
 let g:lsp_diagnostics_signs_hint = {'text': 'ﯦ'}
 let g:lsp_diagnostics_signs_information = {'text': ''}
 let g:lsp_diagnostics_signs_warning = {'text': ''}
-let g:lsp_document_code_action_signs_enabled = 0
-augroup _ag_vim_lsp
-  autocmd!
-  if executable('bash-language-server')
-    autocmd User lsp_setup call lsp#register_server({
-          \'name': 'bash-language-server',
-          \'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
-          \'allowlist': ['sh']
-          \})
+let g:lsp_document_code_action_signs_hint = {'text': ''}
+
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  if exists('+tagfunc')
+    setlocal tagfunc=lsp#tagfunc
   endif
-  if executable('cquery')
-    autocmd User lsp_setup call lsp#register_server({
-          \'name': 'cquery',
-          \'cmd': {server_info->['cquery']},
-          \'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-          \'initialization_options': {'cacheDirectory': '/tmp/cquery/cache'},
-          \'allowlist': ['c', 'cpp']
-          \})
-  endif
-  if executable('docker-langserver')
-    autocmd User lsp_setup call lsp#register_server({
-          \'name': 'docker-langserver',
-          \'cmd': {server_info->[&shell, &shellcmdflag, 'docker-langserver --stdio']},
-          \'allowlist': ['dockerfile']
-          \})
-  endif
-  if executable('java') && filereadable(expand('$HOME/.lsp/groovy-language-server/groovy-language-server-all.jar'))
-    autocmd User lsp_setup call lsp#register_server({
-          \'name': 'groovy-language-server',
-          \'cmd': {server_info->['java', '-jar', expand('$HOME/.lsp/groovy-language-server/groovy-language-server-all.jar')]},
-          \'allowlist': ['groovy']
-          \})
-  endif
-  if executable(expand('$HOME/.lsp/kotlin-language-server/server/bin/kotlin-language-server'))
-    autocmd User lsp_setup call lsp#register_server({
-          \'name': 'kotlin-language-server',
-          \'cmd': {server_info->[&shell, &shellcmdflag, expand('$HOME/.lsp/kotlin-language-server/server/bin/kotlin-language-server')]},
-          \'allowlist': ['kotlin']
-          \})
-  endif
-  if executable(expand('$HOME/.lsp/texlab'))
-    autocmd User lsp_setup call lsp#register_server({
-          \'name': 'texlab',
-          \'cmd': {server_info->[expand('$HOME/.lsp/texlab')]},
-          \'allowlist': ['tex']
-          \})
-  endif
-  if executable('typescript-language-server')
-    autocmd User lsp_setup call lsp#register_server({
-          \'name': 'typescript-language-server',
-          \'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-          \'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-          \'allowlist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact']
-          \})
-  endif
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> gs <plug>(lsp-document-symbol-search)
+  nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+  nmap <buffer> gr <plug>(lsp-references)
+  nmap <buffer> gi <plug>(lsp-implementation)
+  nmap <buffer> gt <plug>(lsp-type-definition)
+  nmap <buffer> <leader>rn <plug>(lsp-rename)
+  nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+  nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+  nmap <buffer> K <plug>(lsp-hover)
+endfunction
+
+augroup lsp_install
+  au!
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
-" general
-nnoremap <silent> <Esc><Esc> :nohlsearch<LF>
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 nnoremap <silent> tt :tabnew<CR>
 nnoremap <silent> th :tabprevious<CR>
 nnoremap <silent> tl :tabnext<CR>
@@ -195,9 +108,3 @@ nmap <silent> gcw <Plug>(caw:wrap:toggle)
 xmap <silent> gcw <Plug>(caw:wrap:toggle)
 " NERDTree
 nnoremap <silent> <C-n> :NERDTreeToggle<CR>
-" vim-clang-format
-nnoremap <silent> cf :ClangFormat<CR>
-" vim-lsp
-nnoremap <silent> <C-h> :LspPreviousError<CR>
-nnoremap <silent> <C-l> :LspNextError<CR>
-nnoremap <silent> <F2> :LspRename<CR>
