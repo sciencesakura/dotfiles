@@ -1,9 +1,9 @@
-[[ -f $HOME/.profile ]] && . "$HOME/.profile"
-[[ -f $HOME/.bashrc  ]] && . "$HOME/.bashrc"
-
 __source_file() {
   [[ -r $1 ]] && . "$1"
 }
+
+__source_file "$HOME/.profile"
+__source_file "$HOME/.bashrc"
 
 if type brew &> /dev/null; then
   __source_file "$(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"

@@ -46,11 +46,7 @@ __put_path() {
     [ -z "$e" -o "$e" = "$1" ] && continue
     WKPATH="$WKPATH:$e"
   done
-  if [ -z "$WKPATH" ]; then
-    PATH="$1"
-  else
-    PATH="$1$WKPATH"
-  fi
+  PATH="$1$WKPATH"
 }
 
 __put_path "$NODEBREW_ROOT/current/bin"
