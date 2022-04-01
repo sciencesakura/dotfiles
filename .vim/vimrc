@@ -47,9 +47,16 @@ endif
 
 if &t_Co > 1
   syntax enable
-	colorscheme iceberg
+  colorscheme iceberg
 endif
 
+" asyncomplete-file.vim
+autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+      \ 'name': 'file',
+      \ 'allowlist': ['*'],
+      \ 'priority': 10,
+      \ 'completor': function('asyncomplete#sources#file#completor')
+      \ }))
 " caw.vim
 let g:caw_no_default_keymappings = 1
 " NERDTree
@@ -92,7 +99,7 @@ function! s:on_lsp_buffer_enabled() abort
 endfunction
 
 augroup lsp_install
-  au!
+  autocmd!
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
