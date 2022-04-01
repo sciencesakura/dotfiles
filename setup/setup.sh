@@ -32,7 +32,7 @@ for e in $(ls "$curdir/../.vim"); do
   ln -s "$(realpath "$curdir/../.vim/$e")" "$HOME/.vim/"
 done
 # others
-for e in bin .bash_profile .bashrc .inputrc .npmrc; do
+for e in bin .bash_profile .bashrc .inputrc .npmrc .profile; do
   __rmifexist "$HOME/$e"
   ln -s "$(realpath "$curdir/../$e")" "$HOME/"
 done
