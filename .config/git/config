@@ -6,22 +6,3 @@
 	quotepath = false
 [push]
 	default = simple
-[alias]
-	aa = add .
-	ad = add
-	br = branch
-	ci = commit
-	co = checkout
-	di = diff
-	fe = fetch
-	lo = log
-	lp = log -p
-	me = merge
-	pl = pull
-	ps = push
-	rb = rebase
-	rs = restore
-	rt = reset
-	rv = revert
-	sc = sparse-checkout
-	sw = switch

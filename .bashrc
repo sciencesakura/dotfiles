@@ -13,7 +13,6 @@ alias mkdir='mkdir -p'
 alias tree='tree -C'
 alias rename='rename -v'
 alias grep='grep --color=auto'
-alias g='git'
 alias s='git status'
 
 mkcd() {
@@ -36,6 +35,10 @@ ticks() {
   fi
 }
 
+#
+# completions
+#
+__bashrc_source_file /usr/local/etc/bash_completion.d/git-completion.bash
 if type brew &> /dev/null; then
   __bashrc_source_file "$(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
 fi
