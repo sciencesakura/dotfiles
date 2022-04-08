@@ -1,5 +1,9 @@
 [[ "$-" != *i* ]] && return
 
+__bashrc_source_file() {
+  [[ -r $1 ]] && . "$1"
+}
+
 alias q='exit'
 alias ls='ls --color=auto'
 alias ll='ls -lA'
@@ -31,3 +35,9 @@ ticks() {
     printf "$tticks\n"
   fi
 }
+
+if type brew &> /dev/null; then
+  __bashrc_source_file "$(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
+fi
+
+unset -f __bashrc_source_file
