@@ -35,10 +35,8 @@ ticks() {
   fi
 }
 
-#
-# completions
-#
 __bashrc_source_file /usr/local/etc/bash_completion.d/git-completion.bash
+__bashrc_source_file /usr/local/etc/bash_completion.d/git-prompt.sh
 if type brew &> /dev/null; then
   __bashrc_source_file "$(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
 fi

@@ -8,18 +8,22 @@ __source_file() {
 __source_file "$HOME/.profile"
 
 #
+# for interactive
+#
+__source_file "$HOME/.bashrc"
+
+#
 # environment variables for bash
 #
 export HISTCONTROL=ignorespace:erasedups
 export HISTIGNORE=ll:ls:q:s
-export HISTTIMEFORMAT="%F %T "
+export HISTTIMEFORMAT='%F %T '
 export PROMPT_DIRTRIM=4
-export PS1="\[\e[33m\]\u\[\e[0m\]@\[\e[32m\]\h\[\e[0m\] \[\e[36m\]\w\[\e[0m\]\$ "
-
-#
-# for interactive
-#
-__source_file "$HOME/.bashrc"
+if type __git_ps1 &> /dev/null; then
+  export PS1='\[\e[33m\]\u\[\e[m\]@\[\e[32m\]\h\[\e[m\] \[\e[1;34m\]\w\[\e[1;31m\]$(__git_ps1)\[\e[m\]$ '
+else
+  export PS1='\[\e[33m\]\u\[\e[m\]@\[\e[32m\]\h\[\e[m\] \[\e[1;34m\]\w\[\e[m\]$ '
+fi
 
 #
 # others
