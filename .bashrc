@@ -4,7 +4,7 @@ __bashrc_source_file() {
   [[ -r $1 ]] && . "$1"
 }
 
-alias q='exit'
+alias q=exit
 alias ls='ls --color=auto'
 alias ll='ls -lA'
 alias cp='cp -i'
@@ -15,12 +15,32 @@ alias rename='rename -v'
 alias grep='grep --color=auto'
 alias s='git status'
 
+#
+# Replace CRLF with LF
+#
+crlf2lf() {
+  tr -d \\r <"$1"
+}
+
+#
+# Replace LF with CRLF
+#
+lf2crlf() {
+  sed 's/$/\r/' "$1"
+}
+
+#
+# `mkdir` and `cd`
+#
 mkcd() {
   mkdir "$@" && cd "$1"
 }
 
+#
+# Print the `PATH` environment variable
+#
 path() {
-  printf "$PATH\n" | tr ":" "\n"
+  printf "$PATH\n" | tr : \\n
 }
 
 ticks() {
