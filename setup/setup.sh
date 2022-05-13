@@ -22,9 +22,6 @@ for e in git tmux; do
   __rmifexist "$XDG_CONFIG_HOME/$e"
   ln -s "$(realpath "$curdir/../.config/$e")" "$XDG_CONFIG_HOME/"
 done
-# .ssh/config
-__mkdirifnotexist "$HOME/.ssh"
-ln -s "$(realpath "$curdir/../.ssh/config")" "$HOME/.ssh/"
 # .vim
 __mkdirifnotexist "$HOME/.vim"
 for e in $(ls "$curdir/../.vim"); do
@@ -32,7 +29,7 @@ for e in $(ls "$curdir/../.vim"); do
   ln -s "$(realpath "$curdir/../.vim/$e")" "$HOME/.vim/"
 done
 # others
-for e in bin .bash_profile .bashrc .inputrc .npmrc .profile; do
+for e in bin .bash_profile .bashrc .inputrc .profile; do
   __rmifexist "$HOME/$e"
   ln -s "$(realpath "$curdir/../$e")" "$HOME/"
 done
