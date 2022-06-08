@@ -15,19 +15,36 @@ alias rename='rename -v'
 alias grep='grep --color=auto'
 alias s='git status'
 
-#
-# Replace CRLF with LF
-#
-crlf2lf() {
-  tr -d \\r <"$1"
-}
+if type nkf &> /dev/null; then
 
-#
-# Replace LF with CRLF
-#
-lf2crlf() {
-  sed 's/$/\r/' "$1"
-}
+  #
+  # Replace CRLF with LF
+  #
+  crlf2lf() {
+    nkf --overwrite -Lu "$@"
+  }
+
+  #
+  # Replace LF with CRLF
+  #
+  lf2crlf() {
+    nkf --overwrite -Lw "$@"
+  }
+
+  #
+  # Add BOM to the specified UTF-8 file
+  #
+  utf8bom() {
+    nkf --overwrite --ic=UTF-8 --oc=UTF-8-BOM "$@"
+  }
+
+  #
+  # Remove BOM from the specified UTF-8 file
+  #
+  rmutf8bom() {
+    nkf --overwrite --ic=UTF-8-BOM --ic=UTF-8 "$@"
+  }
+fi
 
 #
 # `mkdir` and `cd`
