@@ -73,10 +73,18 @@ ticks() {
 }
 
 if type brew &> /dev/null; then
-  __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/docker"
   __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/git-completion.bash"
   __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
   __bashrc_source_file "$(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
+fi
+
+if [[ -d /Applications/Docker.app ]]; then
+  __bashrc_source_file "/Applications/Docker.app/Contents/Resources/etc/docker.bash-completion"
+  __bashrc_source_file "/Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion"
+fi
+
+if [[ -d "$HOME/etc/bash_completion.d" ]]; then
+  . "$HOME/etc/bash_completion.d/"*
 fi
 
 unset -f __bashrc_source_file
