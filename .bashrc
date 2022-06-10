@@ -4,7 +4,6 @@ __bashrc_source_file() {
   [[ -r $1 ]] && . "$1"
 }
 
-alias q=exit
 alias ls='ls --color=auto'
 alias ll='ls -lA'
 alias cp='cp -i'
@@ -13,6 +12,10 @@ alias mkdir='mkdir -p'
 alias tree='tree -C'
 alias rename='rename -v'
 alias grep='grep --color=auto'
+
+alias g='gcloud config configurations list'
+alias k='kubectl config get-contexts'
+alias q=exit
 alias s='git status'
 
 if type nkf &> /dev/null; then
