@@ -1,7 +1,7 @@
 #
 # POSIX
 #
-export HISTSIZE=1024
+export HISTSIZE=1048576
 export LANG=en_US
 
 #
