@@ -48,26 +48,35 @@ if &t_Co > 1
   colorscheme iceberg
 endif
 
-" asyncomplete-file.vim
+" asyncomplete.vim
 autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
       \ 'name': 'file',
       \ 'allowlist': ['*'],
       \ 'priority': 10,
       \ 'completor': function('asyncomplete#sources#file#completor')
       \ }))
+autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+      \ 'name': 'buffer',
+      \ 'allowlist': ['*'],
+      \ 'priority': 90,
+      \ 'completor': function('asyncomplete#sources#buffer#completor')
+      \ }))
+
 " caw.vim
 let g:caw_no_default_keymappings = 1
+
 " NERDTree
 let g:NERDTreeIgnore = ['^\.DS_Store$', '^\.git', '^Thumbs.db$', '\.swp$']
 let g:NERDTreeWinSize = 42
-" nerdtree-git-plugin
 let g:NERDTreeGitStatusUseNerdFonts = 1
+
 " previm
 function! s:install_previm()
   let g:previm_enable_realtime = 1
   let g:previm_show_header = 0
   packadd previm
 endfunction
+
 " vim-airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
