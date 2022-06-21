@@ -65,6 +65,10 @@ autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#s
 " caw.vim
 let g:caw_no_default_keymappings = 1
 
+" emmet-vim
+let g:user_emmet_install_global = 0
+autocmd FileType html,xml EmmetInstall
+
 " NERDTree
 let g:NERDTreeIgnore = ['^\.DS_Store$', '^\.git', '^Thumbs.db$', '\.swp$']
 let g:NERDTreeWinSize = 42
