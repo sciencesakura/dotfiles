@@ -1,6 +1,8 @@
+start	git@github.com:Shougo/context_filetype.vim.git
 start	git@github.com:Xuyuanp/nerdtree-git-plugin.git
 start	git@github.com:chrisbra/csv.vim.git
 start	git@github.com:cocopon/iceberg.vim.git
+start	git@github.com:elubow/cql-vim.git
 start	git@github.com:mattn/emmet-vim.git
 start	git@github.com:mattn/vim-lsp-settings.git
 start	git@github.com:prabirshrestha/asyncomplete-buffer.vim.git
