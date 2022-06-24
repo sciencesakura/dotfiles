@@ -76,6 +76,7 @@ ticks() {
 }
 
 if type brew &> /dev/null; then
+  __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/gh"
   __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/git-completion.bash"
   __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
   __bashrc_source_file "$(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"

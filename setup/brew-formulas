@@ -5,6 +5,7 @@ core:docker
 core:doxygen
 core:findutils
 core:gcc
+core:gh
 core:gnu-sed
 core:gnupg
 core:go
