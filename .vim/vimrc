@@ -115,6 +115,8 @@ function! s:on_lsp_buffer_enabled() abort
 endfunction
 
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
+nnoremap <silent> bh :bprevious<CR>
+nnoremap <silent> bl :bnext<CR>
 nnoremap <silent> tt :tabnew<CR>
 nnoremap <silent> th :tabprevious<CR>
 nnoremap <silent> tl :tabnext<CR>
