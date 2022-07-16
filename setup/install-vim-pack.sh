@@ -5,8 +5,18 @@ packroot="$HOME/.vim/pack"
 
 while read line; do
   kind="$(printf "$line\n" | cut -f 1)"
-  rurl="$(printf "$line\n" | cut -f 2)"
-  [ -d "$packroot/plugins/$kind" ] || mkdir -p "$packroot/plugins/$kind"
-  cd "$packroot/plugins/$kind"
-  git clone --depth 1 "$rurl"
+  url="$(printf "$line\n" | cut -f 2)"
+  name="${url##*/}"
+  name="${name%.git}"
+  repodir="$packroot/plugins/$kind/$name"
+  if [ -d "$repodir" ]; then
+    printf "warning! $url is already cloned.\n"
+    continue
+  fi
+  options="--depth 1"
+  branch="$(printf "$line\n" | cut -f 3)"
+  if [ -n "$branch" ]; then
+    options="$options --branch $branch"
+  fi
+  git clone $options "$url" "$repodir"
 done < "$curdir/vim-pack.tsv"
