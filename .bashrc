@@ -12,6 +12,7 @@ alias mkdir='mkdir -p'
 alias tree='tree -C'
 alias rename='rename -v'
 alias grep='grep --color=auto'
+alias jobs='jobs -l'
 
 alias g='gcloud config configurations list'
 alias k='kubectl config get-contexts'
