@@ -1,16 +1,16 @@
-__source_file() {
+__bash_profile_source() {
   [[ -r $1 ]] && . "$1"
 }
 
 #
 # common profile
 #
-__source_file "$HOME/.profile"
+__bash_profile_source "$HOME/.profile"
 
 #
 # for interactive
 #
-__source_file "$HOME/.bashrc"
+__bash_profile_source "$HOME/.bashrc"
 
 #
 # environment variables for bash
@@ -29,8 +29,10 @@ fi
 # others
 #
 if type brew &> /dev/null; then
-  __source_file "$(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
+  __bash_profile_source "$(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
 fi
-__source_file "$HOME/.sdkman/bin/sdkman-init.sh"
 
-unset -f __source_file
+[[ -z $SDKMAN_DIR ]] && export SDKMAN_DIR="$HOME/.sdkman"
+__bash_profile_source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+unset -f __bash_profile_source
