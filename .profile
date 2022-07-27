@@ -47,8 +47,11 @@ if type vim > /dev/null 2>&1; then
   export EDITOR=vim
 fi
 
-[ -z "$NODEBREW_ROOT" ] && export NODEBREW_ROOT="$HOME/.nodebrew"
-__put_path "$NODEBREW_ROOT/current/bin"
+if type nodebrew > /dev/null 2>&1; then
+  [ -z "$NODEBREW_ROOT" ] && export NODEBREW_ROOT="$HOME/.nodebrew"
+  __put_path "$NODEBREW_ROOT/current/bin"
+  [ -d "$NODEBREW_ROOT/src" ] || mkdir -p "$NODEBREW_ROOT/src"
+fi
 
 __put_path "$HOME/bin"
 
