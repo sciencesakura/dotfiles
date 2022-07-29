@@ -53,9 +53,20 @@ if type nodebrew > /dev/null 2>&1; then
   [ -d "$NODEBREW_ROOT/src" ] || mkdir -p "$NODEBREW_ROOT/src"
 fi
 
+if type pyenv > /dev/null 2>&1; then
+  [ -z "$PYENV_ROOT" ] && export PYENV_ROOT="$HOME/.pyenv"
+  __put_path "$PYENV_ROOT/bin"
+fi
+
 __put_path "$HOME/bin"
 
 export PATH
-
 unset -f __put_path
 unset -v WKIFS WKPATH
+
+[ -z "$SDKMAN_DIR" ] && export SDKMAN_DIR="$HOME/.sdkman"
+[ -r "$SDKMAN_DIR/bin/sdkman-init.sh" ] && . "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+if type pyenv > /dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi

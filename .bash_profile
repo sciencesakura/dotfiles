@@ -32,7 +32,4 @@ if type brew &> /dev/null; then
   __bash_profile_source "$(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
 fi
 
-[[ -z $SDKMAN_DIR ]] && export SDKMAN_DIR="$HOME/.sdkman"
-__bash_profile_source "$SDKMAN_DIR/bin/sdkman-init.sh"
-
 unset -f __bash_profile_source
