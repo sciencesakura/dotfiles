@@ -13,6 +13,7 @@ start	git@github.com:preservim/nerdtree.git
 opt	git@github.com:previm/previm.git	
 start	git@github.com:ryanoasis/vim-devicons.git	
 start	git@github.com:sciencesakura/cql-vim.git	feature
+start	git@github.com:shumphrey/fugitive-gitlab.vim.git	
 start	git@github.com:tiagofumo/vim-nerdtree-syntax-highlight.git	
 start	git@github.com:tpope/vim-fugitive.git	
 start	git@github.com:tpope/vim-rhubarb.git	
