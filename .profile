@@ -15,7 +15,8 @@ __put_path() {
 # POSIX
 #
 export HISTSIZE=1048576
-export LANG=en_US
+export LANG=C
+export PS1='\u@\h \w \$ '
 
 #
 # freedesktop.org
@@ -33,24 +34,23 @@ if [ "$(uname)" = 'Darwin' ]; then
     __put_path '/opt/homebrew/bin'
   fi
   if type brew > /dev/null 2>&1; then
-    __put_path "$(brew --prefix)/opt/grep/libexec/gnubin"
-    __put_path "$(brew --prefix)/opt/gnu-sed/libexec/gnubin"
-    __put_path "$(brew --prefix)/opt/findutils/libexec/gnubin"
     __put_path "$(brew --prefix)/opt/coreutils/libexec/gnubin"
+    __put_path "$(brew --prefix)/opt/findutils/libexec/gnubin"
+    __put_path "$(brew --prefix)/opt/gnu-sed/libexec/gnubin"
+    __put_path "$(brew --prefix)/opt/grep/libexec/gnubin"
   fi
 fi
 
-#
-# others
-#
 if type vim > /dev/null 2>&1; then
   export EDITOR=vim
+elif type vi > /dev/null 2>&1; then
+  export EDITOR=vi
 fi
 
 if type nodebrew > /dev/null 2>&1; then
   [ -z "$NODEBREW_ROOT" ] && export NODEBREW_ROOT="$HOME/.nodebrew"
-  __put_path "$NODEBREW_ROOT/current/bin"
   [ -d "$NODEBREW_ROOT/src" ] || mkdir -p "$NODEBREW_ROOT/src"
+  __put_path "$NODEBREW_ROOT/current/bin"
 fi
 
 if type pyenv > /dev/null 2>&1; then
@@ -64,9 +64,9 @@ export PATH
 unset -f __put_path
 unset -v WKIFS WKPATH
 
-[ -z "$SDKMAN_DIR" ] && export SDKMAN_DIR="$HOME/.sdkman"
-[ -r "$SDKMAN_DIR/bin/sdkman-init.sh" ] && . "$SDKMAN_DIR/bin/sdkman-init.sh"
-
 if type pyenv > /dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
+
+[ -z "$SDKMAN_DIR" ] && export SDKMAN_DIR="$HOME/.sdkman"
+[ -r "$SDKMAN_DIR/bin/sdkman-init.sh" ] && . "$SDKMAN_DIR/bin/sdkman-init.sh"
