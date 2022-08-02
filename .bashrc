@@ -16,7 +16,7 @@ alias jobs='jobs -l'
 
 alias g='gcloud config configurations list'
 alias k='kubectl config get-contexts'
-alias q=exit
+alias :q=exit
 alias s='git status'
 
 if type nkf &> /dev/null; then
