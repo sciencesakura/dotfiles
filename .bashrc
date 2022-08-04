@@ -85,6 +85,7 @@ if type brew &> /dev/null; then
   __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
   __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/google-cloud-sdk"
   __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/lab"
+  __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/maven"
 fi
 
 if [[ -d "$HOME/etc/bash_completion.d" ]]; then
