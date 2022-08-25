@@ -88,8 +88,7 @@ if type brew &> /dev/null; then
   __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/maven"
 fi
 
-if [[ -d "$HOME/etc/bash_completion.d" ]]; then
-  . "$HOME/etc/bash_completion.d/"*
-fi
+__bashrc_source_file "$HOME/etc/bash_completion.d/kubectl"
+__bashrc_source_file "$HOME/etc/bash_completion.d/npm"
 
 unset -f __bashrc_source_file
