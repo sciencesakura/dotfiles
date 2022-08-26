@@ -57,7 +57,7 @@ autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#s
       \ }))
 autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
       \ 'name': 'buffer',
-      \ 'allowlist': ['*'],
+      \ 'allowlist': ['markdown', 'text'],
       \ 'priority': 90,
       \ 'completor': function('asyncomplete#sources#buffer#completor')
       \ }))
@@ -96,6 +96,7 @@ let g:lsp_diagnostics_signs_hint = {'text': 'ﯦ'}
 let g:lsp_diagnostics_signs_information = {'text': ''}
 let g:lsp_diagnostics_signs_warning = {'text': ''}
 let g:lsp_document_code_action_signs_hint = {'text': ''}
+" let g:lsp_log_file = expand('$HOME/var/log/vim-lsp.log')
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
