@@ -1,12 +1,9 @@
+core:7-zip
 core:bash
 core:bash-completion@2
 core:coreutils
-core:findutils
-core:gnu-sed
-core:grep
 core:jq
 core:nkf
-core:p7zip
 core:rename
 core:tmux
 core:tree

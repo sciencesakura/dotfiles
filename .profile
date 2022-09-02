@@ -35,9 +35,6 @@ if [ "$(uname)" = 'Darwin' ]; then
   fi
   if type brew > /dev/null 2>&1; then
     __put_path "$(brew --prefix)/opt/coreutils/libexec/gnubin"
-    __put_path "$(brew --prefix)/opt/findutils/libexec/gnubin"
-    __put_path "$(brew --prefix)/opt/gnu-sed/libexec/gnubin"
-    __put_path "$(brew --prefix)/opt/grep/libexec/gnubin"
   fi
 fi
 
