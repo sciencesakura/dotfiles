@@ -1,5 +1,4 @@
 set autoindent
-set belloff=all
 set encoding=utf-8
 set expandtab
 set ignorecase
@@ -9,7 +8,6 @@ set shiftwidth=2
 set smartcase
 set splitbelow
 set tabstop=2
-set termwinsize=16x0
 if has('clipboard')
   set clipboard=unnamed
 endif
@@ -30,18 +28,44 @@ if has('syntax')
   set cursorline
   set spell
   set spelllang=en,cjk
-  set spelloptions=camel
-endif
-if has('termguicolors') && $COLORTERM == 'truecolor'
-  set termguicolors
 endif
 
-if $TERM !~ '^xterm'
-  let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
-  let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
+nnoremap <silent> bh :bprevious<CR>
+nnoremap <silent> bl :bnext<CR>
+nnoremap <silent> tt :tabnew<CR>
+nnoremap <silent> th :tabprevious<CR>
+nnoremap <silent> tl :tabnext<CR>
+
+if v:version >= 800
+  set belloff=all
+  if has('termguicolors') && $COLORTERM == 'truecolor'
+    set termguicolors
+  endif
+
+  if $TERM !~ '^xterm'
+    let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+    let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+  endif
+endif
+
+if v:version >= 801
+  if has('terminal')
+    set termwinsize=16x0
+
+    nnoremap <silent> tm :terminal<CR>
+  endif
+endif
+
+if v:version >= 900
+  if has('syntax')
+    set spelloptions=camel
+  endif
 endif
 
 filetype plugin indent on
+
+" ----------------------------------------------------------------
 
 if &t_Co > 1
   syntax enable
@@ -115,13 +139,6 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> K <plug>(lsp-hover)
 endfunction
 
-nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
-nnoremap <silent> bh :bprevious<CR>
-nnoremap <silent> bl :bnext<CR>
-nnoremap <silent> tt :tabnew<CR>
-nnoremap <silent> th :tabprevious<CR>
-nnoremap <silent> tl :tabnext<CR>
-nnoremap <silent> tm :terminal<CR>
 " caw.vim
 nmap <silent> gcc <Plug>(caw:hatpos:toggle)
 xmap <silent> gcc <Plug>(caw:hatpos:toggle)
