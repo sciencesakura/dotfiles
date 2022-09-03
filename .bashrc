@@ -1,6 +1,8 @@
 [[ "$-" != *i* ]] && return
 
-__bashrc_source_file() {
+[[ -z $__OS_NAME ]] && export __OS_NAME="$(uname -s)"
+
+__bashrc__source() {
   [[ -r $1 ]] && . "$1"
 }
 
@@ -15,10 +17,11 @@ alias grep='grep --color=auto'
 alias jobs='jobs -l'
 
 alias :q=exit
-alias s='git status'
+alias gs='git status'
+alias kc=kubectx
+alias kn=kubens
 
 if type nkf &> /dev/null; then
-
   #
   # Replace CRLF with LF
   #
@@ -74,19 +77,9 @@ ticks() {
   fi
 }
 
-if type brew &> /dev/null; then
-  __bashrc_source_file "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-  __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/docker"
-  __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/docker-compose"
-  __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/gh"
-  __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/git-completion.bash"
-  __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
-  __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/google-cloud-sdk"
-  __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/lab"
-  __bashrc_source_file "$(brew --prefix)/etc/bash_completion.d/maven"
+if [[ $__OS_NAME = 'Darwin' ]]; then
+  type brew &> /dev/null && \
+    __bashrc__source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 fi
 
-__bashrc_source_file "$HOME/etc/bash_completion.d/kubectl"
-__bashrc_source_file "$HOME/etc/bash_completion.d/npm"
-
-unset -f __bashrc_source_file
+unset -f __bashrc__source

@@ -1,4 +1,10 @@
-__put_path() {
+[ -z "$__OS_NAME" ] && export __OS_NAME="$(uname -s)"
+
+__profile__source() {
+  [ -r "$1" ] && . "$1"
+}
+
+__profile__putpath() {
   [ -d "$1" ] || return
   WKPATH="$1"
   WKIFS="$IFS"
@@ -26,17 +32,8 @@ export PS1='\u@\h \w \$ '
 [ -z "$XDG_DATA_HOME"   ] && export XDG_DATA_HOME="$HOME/.local/share"
 [ -z "$XDG_STATE_HOME"  ] && export XDG_STATE_HOME="$HOME/.local/state"
 
-#
-# Homebrew
-#
-if [ "$(uname)" = 'Darwin' ]; then
-  if [ "$(uname -m)" = 'arm64' ]; then
-    __put_path '/opt/homebrew/bin'
-  fi
-  if type brew > /dev/null 2>&1; then
-    __put_path "$(brew --prefix)/opt/coreutils/libexec/gnubin"
-  fi
-fi
+[ "$__OS_NAME" = 'Darwin' -a "$(uname -m)" = 'arm64' ] && \
+  __profile__putpath '/opt/homebrew/bin'
 
 if type vim > /dev/null 2>&1; then
   export EDITOR=vim
@@ -47,23 +44,34 @@ fi
 if type nodebrew > /dev/null 2>&1; then
   [ -z "$NODEBREW_ROOT" ] && export NODEBREW_ROOT="$HOME/.nodebrew"
   [ -d "$NODEBREW_ROOT/src" ] || mkdir -p "$NODEBREW_ROOT/src"
-  __put_path "$NODEBREW_ROOT/current/bin"
+  __profile__putpath "$NODEBREW_ROOT/current/bin"
 fi
 
 if type pyenv > /dev/null 2>&1; then
   [ -z "$PYENV_ROOT" ] && export PYENV_ROOT="$HOME/.pyenv"
-  __put_path "$PYENV_ROOT/bin"
+  __profile__putpath "$PYENV_ROOT/bin"
 fi
 
-__put_path "$HOME/bin"
+if [ "$__OS_NAME" = 'Darwin' ]; then
+  if type brew > /dev/null 2>&1; then
+    __profile__putpath "$(brew --prefix)/opt/coreutils/libexec/gnubin"
+  fi
+fi
 
+# ----------------------------------------------------------------
 export PATH
-unset -f __put_path
-unset -v WKIFS WKPATH
 
 if type pyenv > /dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-[ -z "$SDKMAN_DIR" ] && export SDKMAN_DIR="$HOME/.sdkman"
-[ -r "$SDKMAN_DIR/bin/sdkman-init.sh" ] && . "$SDKMAN_DIR/bin/sdkman-init.sh"
+[ -z "$SDKMAN_DIR" ] && \
+  export SDKMAN_DIR="$HOME/.sdkman" && \
+  __profile__source "$SDKMAN_DIR/bin/sdkman-init.sh"
+# ----------------------------------------------------------------
+
+__profile__putpath "$HOME/bin" && export PATH
+
+unset -f __profile__putpath
+unset -f __profile__source
+unset -v WKIFS WKPATH
