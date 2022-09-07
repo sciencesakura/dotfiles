@@ -65,9 +65,8 @@ if type pyenv > /dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-[ -z "$SDKMAN_DIR" ] && \
-  export SDKMAN_DIR="$HOME/.sdkman" && \
-  __profile__source "$SDKMAN_DIR/bin/sdkman-init.sh"
+[ -z "$SDKMAN_DIR" ] && export SDKMAN_DIR="$HOME/.sdkman"
+__profile__source "$SDKMAN_DIR/bin/sdkman-init.sh"
 # ----------------------------------------------------------------
 
 __profile__putpath "$HOME/bin" && export PATH
