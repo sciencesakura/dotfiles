@@ -26,16 +26,15 @@ if has('smartindent')
 endif
 if has('syntax')
   set cursorline
-  set spell
   set spelllang=en,cjk
 endif
 
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
-nnoremap <silent> bh :bprevious<CR>
-nnoremap <silent> bl :bnext<CR>
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> tt :tabnew<CR>
-nnoremap <silent> th :tabprevious<CR>
-nnoremap <silent> tl :tabnext<CR>
+nnoremap <silent> [t :tabprevious<CR>
+nnoremap <silent> ]t :tabnext<CR>
 
 if v:version >= 800
   set belloff=all
@@ -62,6 +61,8 @@ if v:version >= 900
     set spelloptions=camel
   endif
 endif
+
+let g:c_syntax_for_h = 1
 
 filetype plugin indent on
 
@@ -133,7 +134,7 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> gr <plug>(lsp-references)
   nmap <buffer> gi <plug>(lsp-implementation)
   nmap <buffer> gt <plug>(lsp-type-definition)
-  nmap <buffer> <leader>rn <plug>(lsp-rename)
+  nmap <buffer> <F2> <plug>(lsp-rename)
   nmap <buffer> [g <plug>(lsp-previous-diagnostic)
   nmap <buffer> ]g <plug>(lsp-next-diagnostic)
   nmap <buffer> K <plug>(lsp-hover)
