@@ -1,68 +1,65 @@
 [[ "$-" != *i* ]] && return
 
-[[ -z $__OS_NAME ]] && export __OS_NAME="$(uname -s)"
-
 __bashrc__source() {
   [[ -r $1 ]] && . "$1"
 }
 
-alias ls='ls --color=auto'
-alias ll='ls -lA'
-alias cp='cp -i'
-alias mv='mv -i'
-alias mkdir='mkdir -p'
-alias tree='tree -C'
-alias rename='rename -v'
-alias grep='grep --color=auto'
-alias jobs='jobs -l'
+__bashrc__source /etc/bashrc
 
 alias :q=exit
+alias cp='cp -i'
+alias grep='grep --color=auto'
 alias gs='git status'
+alias jobs='jobs -l'
 alias kc=kubectx
 alias kn=kubens
+alias l.='ls -d .*'
+alias ll='ls -l'
+alias ls='ls -F --color=auto'
+alias mkdir='mkdir -p'
+alias mv='mv -i'
+alias path='printf "$PATH\n" | tr : \\n'
+alias rename='rename -v'
+alias tree='tree -C'
 
-if type nkf &> /dev/null; then
-  #
-  # Replace CRLF with LF
-  #
-  crlf2lf() {
-    nkf --overwrite -Lu "$@"
-  }
+type brew &> /dev/null && \
+  __bashrc__source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 
-  #
-  # Replace LF with CRLF
-  #
-  lf2crlf() {
-    nkf --overwrite -Lw "$@"
-  }
-
-  #
-  # Add BOM to the specified UTF-8 file
-  #
-  utf8bom() {
-    nkf --overwrite --ic=UTF-8 --oc=UTF-8-BOM "$@"
-  }
-
-  #
-  # Remove BOM from the specified UTF-8 file
-  #
-  rmutf8bom() {
-    nkf --overwrite --ic=UTF-8-BOM --ic=UTF-8 "$@"
-  }
-fi
+__bashrc__source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 #
-# `mkdir` and `cd`
+# mkdir and cd
 #
 mkcd() {
-  mkdir "$@" && cd "$1"
+  mkdir -p "$@" && cd "$1"
 }
 
 #
-# Print the `PATH` environment variable
+# replace CRLF with LF
 #
-path() {
-  printf "$PATH\n" | tr : \\n
+crlf2lf() {
+  nkf --overwrite -Lu "$@"
+}
+
+#
+# replace LF with CRLF
+#
+lf2crlf() {
+  nkf --overwrite -Lw "$@"
+}
+
+#
+# add BOM to the specified UTF-8 file
+#
+utf8bom() {
+  nkf --overwrite --ic=UTF-8 --oc=UTF-8-BOM "$@"
+}
+
+#
+# remove BOM from the specified UTF-8 file
+#
+rmutf8bom() {
+  nkf --overwrite --ic=UTF-8-BOM --ic=UTF-8 "$@"
 }
 
 ticks() {
@@ -76,10 +73,5 @@ ticks() {
     printf "$tticks\n"
   fi
 }
-
-if [[ $__OS_NAME = 'Darwin' ]]; then
-  type brew &> /dev/null && \
-    __bashrc__source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-fi
 
 unset -f __bashrc__source
