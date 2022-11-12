@@ -1,24 +1,38 @@
-__IS_DARWIN=0
-case "$(uname -s)" in
-  Darwin)
-    __IS_DARWIN=1;;
-esac
+__profile__os="$(uname -s)"
+__profile__arch="$(uname -m)"
 
 __profile__source() {
   [ -r "$1" ] && . "$1"
 }
 
-__profile__putpath() {
+__profile__testpathcontains() {
+  case ":$PATH:" in
+    *:"$1":*) return 0;;
+    *)        return 1;;
+  esac
+}
+
+__profile__pushpath() {
   [ -d "$1" ] || return
-  WKPATH="$1"
-  WKIFS="$IFS"
-  IFS=:
-  for e in $PATH; do
-    [ -z "$e" -o "$e" = "$1" ] && continue
-    WKPATH="$WKPATH:$e"
-  done
-  IFS="$WKIFS"
-  export PATH="$WKPATH"
+  __profile__testpathcontains "$1" && return
+  export PATH="$PATH:$1"
+}
+
+__profile__unshiftpath() {
+  [ -d "$1" ] || return
+  if __profile__testpathcontains "$1"; then
+    WKPATH="$1"
+    WKIFS="$IFS"
+    IFS=:
+    for e in $PATH; do
+      [ "$e" = "$1" ] && continue
+      WKPATH="$WKPATH:$e"
+    done
+    IFS="$WKIFS"
+    export PATH="$WKPATH"
+  else
+    export PATH="$1:$PATH"
+  fi
 }
 
 #
@@ -30,43 +44,47 @@ __profile__putpath() {
 [ -z "$XDG_STATE_HOME"  ] && export XDG_STATE_HOME="$HOME/.local/state"
 
 # homebrew
-if [ "$__IS_DARWIN" = 1 -a "$(uname -m)" = arm64 ]; then
-  __profile__putpath /opt/homebrew/bin
-fi
-if type brew > /dev/null 2>&1; then
+[ "$__profile__os" = Darwin -a "$__profile__arch" = arm64 ] && \
+  __profile__pushpath /opt/homebrew/bin
+if type brew >/dev/null 2>&1; then
+  export HOMEBREW_AUTOREMOVE=1
+  export HOMEBREW_NO_ANALYTICS=1
   export HOMEBREW_NO_AUTO_UPDATE=1
-  if [ "$__IS_DARWIN" == 1 ]; then
+  export HOMEBREW_NO_INSTALL_CLEANUP=1
+  if [ "$__profile__os" = Darwin ]; then
     # prefer GNU coreutils to preinstalled one
-    __profile__putpath "$(brew --prefix)/opt/coreutils/libexec/gnubin"
+    __profile__unshiftpath "$(brew --prefix)/opt/coreutils/libexec/gnubin"
   fi
 fi
 
-# nodebrew
-if type nodebrew > /dev/null 2>&1; then
-  [ -d "$HOME/.nodebrew/src" ] || mkdir -p "$HOME/.nodebrew/src"
-  __profile__putpath "$HOME/.nodebrew/current/bin"
-fi
-
 # pyenv
-if type pyenv > /dev/null 2>&1; then
+if type pyenv >/dev/null 2>&1; then
   export PYENV_ROOT="$HOME/.pyenv"
-  __profile__putpath "$PYENV_ROOT/bin"
+  __profile__unshiftpath "$PYENV_ROOT/bin"
   eval "$(pyenv init -)"
 fi
 
-__profile__putpath "$HOME/bin"
+# nodebrew
+if type nodebrew >/dev/null 2>&1; then
+  [ -d "$HOME/.nodebrew/src" ] || mkdir -p "$HOME/.nodebrew/src"
+  __profile__unshiftpath "$HOME/.nodebrew/current/bin"
+fi
+
+# sdkman
+__profile__source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+__profile__unshiftpath "$HOME/bin"
+__profile__unshiftpath "$HOME/.local/bin"
 
 #
 # other environment variables
 #
-if type vim > /dev/null 2>&1; then
+if type vim >/dev/null 2>&1; then
   export EDITOR=vim
 fi
-export HISTSIZE=1048576
 export LANG=C
 # https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
-unset -f __profile__putpath
-unset -f __profile__source
-unset -v WKIFS WKPATH __IS_DARWIN
+unset -f __profile__unshiftpath __profile__pushpath __profile__testpathcontains __profile__source
+unset -v e WKPATH WKIFS __profile__arch __profile__os
