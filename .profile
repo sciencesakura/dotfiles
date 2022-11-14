@@ -45,7 +45,7 @@ __profile__unshiftpath() {
 
 # homebrew
 [ "$__profile__os" = Darwin -a "$__profile__arch" = arm64 ] && \
-  __profile__pushpath /opt/homebrew/bin
+  __profile__unshiftpath /opt/homebrew/bin
 if type brew >/dev/null 2>&1; then
   export HOMEBREW_AUTOREMOVE=1
   export HOMEBREW_NO_ANALYTICS=1
