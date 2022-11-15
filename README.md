@@ -1,41 +1,36 @@
 # dotfiles
 
-## macOS
-
-### Requirements
+## Installation on macOS
 
 ```sh
-# 1. Command Line Tools for Xcode
+# Install the Command Line Tools for Xcode
 xcode-select --install
 
-# 2. Homebrew
+# Install the tmux-256color
+curl -LO https://invisible-island.net/datafiles/current/terminfo.src.gz && gzip -d terminfo.src.gz
+sudo /usr/bin/tic -xe tmux-256color terminfo.src
+
+# Install the Homebrew
 curl -fsSL "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh" | /bin/bash
 
-# 3. SDKMAN! (optional)
+# Install the SDKMAN!
 curl -fsSL "https://get.sdkman.io" | /bin/bash
-```
 
-### Installation
-
-```sh
-# 1. Clone this repository
+# Clone this repository
 mkdir -p $HOME/github.com/sciencesakura && cd $_
 git clone --depth=1 git@github.com:sciencesakura/dotfiles.git
 cd dotfiles/
 
-# 2. Make links to the dotfiles
+# Make links to the dotfiles
 ./make-symlinks.sh
 
-# 3. Restart the terminal
+# Restart the terminal
+exit
 
-# 4. Install packages via Homebrew
+# Install packages via Homebrew
 ./install-packages.sh homebrew dev dev-java dev-web dev-gke desktop
-```
 
-### Configurations
-
-```sh
-# 1. Use bash as a login shell
+# Use bash as a login shell
 echo "$(brew --prefix)/bin/bash" | sudo tee -a /etc/shells
 chsh -s "$(brew --prefix)/bin/bash"
 ```
