@@ -1,0 +1,19 @@
+user	repo	name	options
+homebrew	core	bash	
+homebrew	core	bash-completion@2	
+homebrew	core	coreutils	
+homebrew	cask-fonts	font-fira-code-nerd-font	
+homebrew	core	gh	
+homebrew	core	git	
+homebrew	cask	iterm2	
+homebrew	core	jq	
+homebrew	core	lab	
+homebrew	core	nkf	
+homebrew	core	pstree	
+harelba	q	q	
+homebrew	core	rename	
+homebrew	core	sevenzip	
+homebrew	core	tmux	
+homebrew	core	tree	
+homebrew	core	vim	
+homebrew	core	yq	

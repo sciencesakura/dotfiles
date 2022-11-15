@@ -1,0 +1,4 @@
+user	repo	name	options
+homebrew	core	kubectx	
+homebrew	core	kubernetes-cli	
+homebrew	cask	google-cloud-sdk	
