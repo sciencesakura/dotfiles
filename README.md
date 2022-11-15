@@ -29,7 +29,7 @@ cd dotfiles/
 # 3. Restart the terminal
 
 # 4. Install packages via Homebrew
-./install-packages.sh homebrew dev dev-java dev-web dev-gke
+./install-packages.sh homebrew dev dev-java dev-web dev-gke desktop
 ```
 
 ### Configurations
