@@ -52,8 +52,9 @@ if type brew >/dev/null 2>&1; then
   export HOMEBREW_NO_AUTO_UPDATE=1
   export HOMEBREW_NO_INSTALL_CLEANUP=1
   if [ "$__profile__os" = Darwin ]; then
-    # prefer GNU coreutils to preinstalled one
+    # prefer GNU coreutils & findutils to preinstalled one
     __profile__unshiftpath "$(brew --prefix)/opt/coreutils/libexec/gnubin"
+    __profile__unshiftpath "$(brew --prefix)/opt/findutils/libexec/gnubin"
   fi
 fi
 

@@ -2,6 +2,8 @@ user	repo	name	options
 homebrew	core	bash	
 homebrew	core	bash-completion@2	
 homebrew	core	coreutils	
+homebrew	core	diffutils	
+homebrew	core	findutils	
 homebrew	cask-fonts	font-fira-code-nerd-font	
 homebrew	core	gh	
 homebrew	core	git	

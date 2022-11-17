@@ -6,6 +6,7 @@ __bashrc__source() {
 
 if type dircolors >/dev/null 2>&1; then
   [[ -r $HOME/.dircolors ]] && eval "$(dircolors -b "$HOME/.dircolors")" || eval "$(dircolors -b)"
+  alias diff='diff --color=auto'
   alias grep='grep --color=auto'
   alias ls='ls --color=auto'
   alias tree='tree -C'
