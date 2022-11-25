@@ -44,8 +44,10 @@ __profile__unshiftpath() {
 [ -z "$XDG_STATE_HOME"  ] && export XDG_STATE_HOME="$HOME/.local/state"
 
 # homebrew
-[ "$__profile__os" = Darwin -a "$__profile__arch" = arm64 ] && \
+if [ "$__profile__os" = Darwin -a "$__profile__arch" = arm64 ]; then
+  __profile__unshiftpath /opt/homebrew/sbin
   __profile__unshiftpath /opt/homebrew/bin
+fi
 if type brew >/dev/null 2>&1; then
   export HOMEBREW_AUTOREMOVE=1
   export HOMEBREW_NO_ANALYTICS=1
