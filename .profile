@@ -72,7 +72,10 @@ if [ -d "$XDG_CONFIG_HOME/volta" ]; then
 fi
 
 # sdkman
-__profile__source "$HOME/.sdkman/bin/sdkman-init.sh"
+if [ -d "$XDG_CONFIG_HOME/sdkman" ]; then
+  export SDKMAN_DIR="$XDG_CONFIG_HOME/sdkman"
+  __profile__source "$SDKMAN_DIR/bin/sdkman-init.sh"
+fi
 
 __profile__unshiftpath "$HOME/bin"
 __profile__unshiftpath "$HOME/.local/bin"

@@ -10,7 +10,8 @@ xcode-select --install
 curl -fsSL "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh" | /bin/bash
 
 # Install the SDKMAN!
-curl -fsSL "https://get.sdkman.io" | /bin/bash
+export SDKMAN_DIR="$HOME/.config/sdkman" && \
+  curl -fsSL "https://get.sdkman.io" | /bin/bash
 
 # Clone this repository
 mkdir -p $HOME/github.com/sciencesakura && cd $_
