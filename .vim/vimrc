@@ -75,7 +75,6 @@ if isdirectory(s:DEIN_REPODIR)
   if dein#load_state(s:DEIN_HOME)
     call dein#begin(s:DEIN_HOME)
     call dein#load_toml(expand('$HOME/.vim/dein.toml'))
-    call dein#load_toml(expand('$HOME/.vim/dein-lazy.toml'), {'lazy': 1})
     call dein#end()
     call dein#save_state()
   endif

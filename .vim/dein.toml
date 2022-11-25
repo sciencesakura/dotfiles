@@ -40,6 +40,39 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo='Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'sciencesakura/cql-vim'
+lazy = true
+on_ft = ['cql']
+rev = 'feature'
+
+[[plugins]]
+repo = 'chrisbra/csv.vim'
+lazy = true
+on_ft = ['csv', 'tsv']
+hook_add = '''
+  let g:csv_highlight_column = 'y'
+'''
+
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+lazy = true
+on_ft = ['html', 'xml']
+
+[[plugins]]
+repo = 'shumphrey/fugitive-gitlab.vim'
+depends = ['vim-fugitive']
+hook_add = '''
+  " Add private GitLab host
+  " let g:fugitive_gitlab_domains = []
+'''
+
+[[plugins]]
 repo = 'cocopon/iceberg.vim'
 hook_add = '''
   colorscheme iceberg
@@ -55,13 +88,22 @@ hook_add = '''
 
 [[plugins]]
 repo = 'Xuyuanp/nerdtree-git-plugin'
+depends = ['nerdtree']
 hook_add = '''
   let g:NERDTreeGitStatusUseNerdFonts = 1
 '''
-depends = ['nerdtree']
 
 [[plugins]]
 repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'previm/previm'
+lazy = true
+on_ft = ['markdown']
+hook_add = '''
+  let g:previm_enable_realtime = 1
+  let g:previm_show_header = 0
+'''
 
 [[plugins]]
 repo = 'vim-airline/vim-airline'
@@ -89,6 +131,7 @@ hook_add = '''
   let g:lsp_diagnostics_signs_information = {'text': ''}
   let g:lsp_diagnostics_signs_warning = {'text': ''}
   let g:lsp_document_code_action_signs_hint = {'text': ''}
+  " let g:lsp_log_file = expand('$HOME/vim-lsp.log')
 '''
 
 [[plugins]]

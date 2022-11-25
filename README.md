@@ -7,11 +7,17 @@
 xcode-select --install
 
 # Install the Homebrew
+# see https://brew.sh/
 curl -fsSL "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh" | /bin/bash
 
 # Install the SDKMAN!
+# see https://sdkman.io/
 export SDKMAN_DIR="$HOME/.config/sdkman" && \
   curl -fsSL "https://get.sdkman.io" | /bin/bash
+
+# Install the dein.vim
+# see https://github.com/Shougo/dein.vim
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/santosned/dein.vim/master/bin/installer.sh)"
 
 # Clone this repository
 mkdir -p $HOME/github.com/sciencesakura && cd $_
