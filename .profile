@@ -65,10 +65,10 @@ if type pyenv >/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-# nodebrew
-if type nodebrew >/dev/null 2>&1; then
-  [ -d "$HOME/.nodebrew/src" ] || mkdir -p "$HOME/.nodebrew/src"
-  __profile__unshiftpath "$HOME/.nodebrew/current/bin"
+# volta
+if [ -d "$XDG_CONFIG_HOME/volta" ]; then
+  export VOLTA_HOME="$XDG_CONFIG_HOME/volta"
+  __profile__unshiftpath "$VOLTA_HOME/bin"
 fi
 
 # sdkman
