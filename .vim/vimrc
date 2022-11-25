@@ -1,4 +1,5 @@
 set autoindent
+set background=dark
 set encoding=utf-8
 set expandtab
 set ignorecase
@@ -64,70 +65,33 @@ endif
 
 let g:c_syntax_for_h = 1
 
-filetype plugin indent on
+"dein Scripts-----------------------------
+let s:DEIN_HOME = expand('$HOME/.cache/dein')
+let s:DEIN_REPODIR = s:DEIN_HOME . '/repos/github.com/Shougo/dein.vim'
 
-" ----------------------------------------------------------------
+if isdirectory(s:DEIN_REPODIR)
+  execute 'set runtimepath^=' . s:DEIN_REPODIR
 
-if &t_Co > 1
-  syntax enable
-  colorscheme iceberg
-endif
-
-" asyncomplete.vim
-autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-      \ 'name': 'file',
-      \ 'allowlist': ['*'],
-      \ 'priority': 10,
-      \ 'completor': function('asyncomplete#sources#file#completor')
-      \ }))
-autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-      \ 'name': 'buffer',
-      \ 'allowlist': ['markdown', 'text'],
-      \ 'priority': 90,
-      \ 'completor': function('asyncomplete#sources#buffer#completor')
-      \ }))
-
-" caw.vim
-let g:caw_no_default_keymappings = 1
-
-" emmet-vim
-let g:user_emmet_install_global = 0
-autocmd FileType html,xml EmmetInstall
-
-" NERDTree
-let g:NERDTreeIgnore = ['^\.DS_Store$', '^\.git', '^Thumbs.db$', '\.swp$']
-let g:NERDTreeWinSize = 42
-let g:NERDTreeGitStatusUseNerdFonts = 1
-
-" previm
-function! s:install_previm()
-  let g:previm_enable_realtime = 1
-  let g:previm_show_header = 0
-  packadd previm
-endfunction
-
-" vim-airline
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-
-" vim-lsp
-if has('popupwin')
-  let g:lsp_diagnostics_float_cursor = 1
-else
-  let g:lsp_diagnostics_echo_cursor = 1
-endif
-let g:lsp_diagnostics_signs_error = {'text': ''}
-let g:lsp_diagnostics_signs_hint = {'text': 'ﯦ'}
-let g:lsp_diagnostics_signs_information = {'text': ''}
-let g:lsp_diagnostics_signs_warning = {'text': ''}
-let g:lsp_document_code_action_signs_hint = {'text': ''}
-" let g:lsp_log_file = expand('$HOME/var/log/vim-lsp.log')
-function! s:on_lsp_buffer_enabled() abort
-  setlocal omnifunc=lsp#complete
-  setlocal signcolumn=yes
-  if exists('+tagfunc')
-    setlocal tagfunc=lsp#tagfunc
+  if dein#load_state(s:DEIN_HOME)
+    call dein#begin(s:DEIN_HOME)
+    call dein#load_toml(expand('$HOME/.vim/dein.toml'))
+    call dein#load_toml(expand('$HOME/.vim/dein-lazy.toml'), {'lazy': 1})
+    call dein#end()
+    call dein#save_state()
   endif
+
+  " If you want to install not installed plugins on startup.
+  if dein#check_install()
+    call dein#install()
+  endif
+endif
+"End dein Scripts-------------------------
+
+filetype plugin indent on
+syntax enable
+
+"vim-lsp
+function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> gd <plug>(lsp-definition)
   nmap <buffer> gs <plug>(lsp-document-symbol-search)
   nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
@@ -140,20 +104,8 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> K <plug>(lsp-hover)
 endfunction
 
-" caw.vim
-nmap <silent> gcc <Plug>(caw:hatpos:toggle)
-xmap <silent> gcc <Plug>(caw:hatpos:toggle)
-nmap <silent> gcw <Plug>(caw:wrap:toggle)
-xmap <silent> gcw <Plug>(caw:wrap:toggle)
-" NERDTree
-nnoremap <silent> <C-n> :NERDTreeToggle<CR>
-
-augroup lazy_packadd
-  autocmd!
-  autocmd FileType markdown call s:install_previm()
-augroup END
-
 augroup lsp_install
   autocmd!
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
+"END vim-lsp

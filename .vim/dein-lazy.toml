@@ -1,0 +1,11 @@
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html', 'xml']
+
+[[plugins]]
+repo = 'previm/previm'
+hook_add = '''
+  let g:previm_enable_realtime = 1
+  let g:previm_show_header = 0
+'''
+on_ft = ['markdown']

@@ -1,0 +1,104 @@
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-buffer.vim'
+depends = ['asyncomplete.vim']
+hook_add = '''
+  autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'allowlist': ['json', 'markdown', 'text', 'toml', 'yaml'],
+    \ 'priority': 90,
+    \ 'completor': function('asyncomplete#sources#buffer#completor')
+    \ }))
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-file.vim'
+depends = ['asyncomplete.vim']
+hook_add = '''
+  autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    \ 'name': 'file',
+    \ 'allowlist': ['*'],
+    \ 'priority': 10,
+    \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+depends = ['asyncomplete.vim']
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo = 'tyru/caw.vim'
+hook_add = '''
+  let g:caw_no_default_keymappings = 1
+  nmap <silent> gcc <plug>(caw:hatpos:toggle)
+  xmap <silent> gcc <plug>(caw:hatpos:toggle)
+  nmap <silent> gcw <plug>(caw:wrap:toggle)
+  xmap <silent> gcw <plug>(caw:wrap:toggle)
+'''
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
+hook_add = '''
+  colorscheme iceberg
+'''
+
+[[plugins]]
+repo = 'preservim/nerdtree'
+hook_add = '''
+  let g:NERDTreeIgnore = ['^\.DS_Store$', '^\.git$', '^Thumbs.db$', '\.swp$']
+  let g:NERDTreeWinSize = min([&columns / 4, 48])
+  nnoremap <silent> <C-n> :NERDTreeToggle<CR>
+'''
+
+[[plugins]]
+repo = 'Xuyuanp/nerdtree-git-plugin'
+hook_add = '''
+  let g:NERDTreeGitStatusUseNerdFonts = 1
+'''
+depends = ['nerdtree']
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+  let g:airline_powerline_fonts = 1
+  let g:airline#extensions#tabline#enabled = 1
+'''
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+hook_add = '''
+  if has('popupwin')
+    let g:lsp_diagnostics_float_cursor = 1
+  else
+    let g:lsp_diagnostics_echo_cursor = 1
+  endif
+  let g:lsp_diagnostics_signs_error = {'text': ''}
+  let g:lsp_diagnostics_signs_hint = {'text': 'ﯦ'}
+  let g:lsp_diagnostics_signs_information = {'text': ''}
+  let g:lsp_diagnostics_signs_warning = {'text': ''}
+  let g:lsp_document_code_action_signs_hint = {'text': ''}
+'''
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+depends = ['vim-lsp']
+
+[[plugins]]
+repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
+depends = ['nerdtree', 'vim-devicons']
+
+[[plugins]]
+repo = 'tpope/vim-rhubarb'
+depends = ['vim-fugitive']
