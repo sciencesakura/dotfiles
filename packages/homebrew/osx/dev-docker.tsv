@@ -1,0 +1,4 @@
+user	repo	name	options
+homebrew	core	docker	
+homebrew	core	docker-compose	
+homebrew	core	lima	

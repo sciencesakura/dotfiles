@@ -31,7 +31,7 @@ cd dotfiles/
 exit
 
 # Install packages via Homebrew
-./install-packages.sh homebrew dev dev-java dev-web dev-gke desktop
+./install-packages.sh homebrew dev dev-java dev-web dev-docker dev-gke desktop
 
 # Use bash as a login shell
 echo "$(brew --prefix)/bin/bash" | sudo tee -a /etc/shells
