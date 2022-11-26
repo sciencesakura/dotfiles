@@ -92,5 +92,12 @@ export LANG=C
 # https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
+#
+## extensions
+#
+for e in "$HOME"/etc/profile.d/*.sh; do
+  __profile__source "$e"
+done
+
 unset -f __profile__unshiftpath __profile__pushpath __profile__testpathcontains __profile__source
 unset -v e WKPATH WKIFS __profile__arch __profile__os
