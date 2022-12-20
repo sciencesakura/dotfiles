@@ -25,13 +25,13 @@ git clone --depth=1 git@github.com:sciencesakura/dotfiles.git
 cd dotfiles/
 
 # Make links to the dotfiles
-./make-symlinks.sh
+./scripts/make-symlinks.sh
 
 # Restart the terminal
 exit
 
 # Install packages via Homebrew
-./install-packages.sh homebrew dev dev-java dev-web dev-docker dev-gke desktop
+./scripts/install-packages.sh homebrew dev dev-java dev-web dev-docker dev-gke desktop
 
 # Use bash as a login shell
 echo "$(brew --prefix)/bin/bash" | sudo tee -a /etc/shells

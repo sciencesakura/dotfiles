@@ -25,7 +25,7 @@ do_install() {
     printf "file not found: $1\n" 1>&2
     return 1
   fi
-  "$REPODIR/internal/install-$pmname-packages.sh" "$1"
+  "$REPODIR/scripts/internal/install-$pmname-packages.sh" "$1"
 }
 
 if [ -z "$2" ]; then
