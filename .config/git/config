@@ -8,5 +8,7 @@
 	tool = vimdiff
 [difftool]
 	prompt = false
+[icdiff]
+	options = -N --tabsize=2
 [push]
 	default = simple
