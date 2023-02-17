@@ -37,7 +37,7 @@ type brew >/dev/null 2>&1 && __bashrc__source "$(brew --prefix)/etc/profile.d/ba
 # environment variables for interactive shell
 #
 export HISTCONTROL=ignorespace:erasedups
-export HISTIGNORE=gs:kc:kn:l.:ll:ls
+export HISTIGNORE=gs:kc:kn:l.:ll:ls:tig
 export HISTTIMEFORMAT='%F %T '
 export HISTSIZE=131072
 export PROMPT_DIRTRIM=4

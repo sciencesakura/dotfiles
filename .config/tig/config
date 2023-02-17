@@ -1,0 +1,7 @@
+set tab-size = 2
+set history-size = 0
+set mouse = true
+set mouse-wheel-cursor = true
+
+bind generic <Ctrl-b> move-page-up
+bind generic <Ctrl-f> move-page-down
