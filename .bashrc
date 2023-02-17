@@ -40,7 +40,7 @@ export HISTCONTROL=ignorespace:erasedups
 export HISTIGNORE=gs:kc:kn:l.:ll:ls:tig
 export HISTTIMEFORMAT='%F %T '
 export HISTSIZE=131072
-export PROMPT_DIRTRIM=4
+export PROMPT_DIRTRIM=2
 if type __git_ps1 >/dev/null 2>&1; then
   export PS1='\[\e[33m\]\u\[\e[m\]@\[\e[32m\]\h\[\e[m\] \[\e[1;34m\]\w\[\e[1;31m\]$(__git_ps1)\[\e[m\]$ '
 else
