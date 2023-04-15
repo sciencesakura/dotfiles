@@ -14,6 +14,6 @@ __bash_profile__source "$HOME/.bashrc"
 
 # add gcloud components to PATH
 type brew &> /dev/null && \
-  __bash_profile__source "$(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
+  __bash_profile__source "$(brew --prefix)/share/google-cloud-sdk/path.bash.inc"
 
 unset -f __bash_profile__source

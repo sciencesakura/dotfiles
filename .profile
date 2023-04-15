@@ -91,8 +91,6 @@ fi
 export LANG=C
 # https://www.haskell.org/ghcup/guide/#env-variables
 export GHCUP_USE_XDG_DIRS=1
-# https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 #
 ## extensions
