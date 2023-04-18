@@ -53,11 +53,8 @@ if type brew >/dev/null 2>&1; then
   export HOMEBREW_NO_ANALYTICS=1
   export HOMEBREW_NO_AUTO_UPDATE=1
   export HOMEBREW_NO_INSTALL_CLEANUP=1
-  if [ "$__profile__os" = Darwin ]; then
-    # prefer GNU coreutils & findutils to preinstalled one
-    __profile__unshiftpath "$(brew --prefix)/opt/coreutils/libexec/gnubin"
-    __profile__unshiftpath "$(brew --prefix)/opt/findutils/libexec/gnubin"
-  fi
+  __profile__unshiftpath "$(brew --prefix)/opt/coreutils/libexec/gnubin"
+  __profile__unshiftpath "$(brew --prefix)/opt/findutils/libexec/gnubin"
   __profile__unshiftpath "$(brew --prefix)/opt/libgxps/bin"
 fi
 
@@ -94,7 +91,7 @@ export LANG=C
 export GHCUP_USE_XDG_DIRS=1
 
 #
-## extensions
+# extensions
 #
 for e in "$HOME"/etc/profile.d/*.sh; do
   __profile__source "$e"

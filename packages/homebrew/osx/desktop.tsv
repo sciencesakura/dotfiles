@@ -1,5 +1,5 @@
-user	repo	name	options
-homebrew	core	evince	
-homebrew	cask	firefox	
-homebrew	cask	gimp	
-homebrew	cask	libreoffice	
+user	repo	name
+homebrew	core	evince
+homebrew	cask	firefox
+homebrew	cask	gimp
+homebrew	cask	libreoffice

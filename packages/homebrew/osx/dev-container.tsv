@@ -1,0 +1,7 @@
+user	repo	name
+homebrew	core	docker
+homebrew	core	docker-buildx
+homebrew	core	docker-compose
+homebrew	core	kubectx
+homebrew	core	kubernetes-cli
+homebrew	core	lima

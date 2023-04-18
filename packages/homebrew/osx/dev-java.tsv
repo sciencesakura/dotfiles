@@ -1,7 +1,6 @@
-user	repo	name	options
-homebrew	core	gradle	--ignore-dependencies
-homebrew	core	gradle-completion	
-homebrew	cask	jdk-mission-control	
-homebrew	cask	jetbrains-toolbox	
-homebrew	core	maven	--ignore-dependencies
-homebrew	core	maven-completion	
+user	repo	name
+homebrew	core	gradle
+homebrew	core	gradle-completion
+homebrew	cask	jdk-mission-control
+homebrew	core	maven
+homebrew	core	maven-completion

@@ -1,3 +1,2 @@
-user	repo	name	options
-homebrew	cask	visual-studio-code	
-homebrew	core	volta	
+user	repo	name
+homebrew	core	volta

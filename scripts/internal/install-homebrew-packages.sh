@@ -12,6 +12,5 @@ tail -n +2 "$packages" | while read line; do
   user="$(printf "$line\n" | cut -f 1)"
   repo="$(printf "$line\n" | cut -f 2)"
   formula="$(printf "$line\n" | cut -f 3)"
-  options="$(printf "$line\n" | cut -f 4)"
-  brew install "$user/$repo/$formula" $options
+  brew install "$user/$repo/$formula"
 done
