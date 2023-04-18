@@ -58,6 +58,7 @@ if type brew >/dev/null 2>&1; then
     __profile__unshiftpath "$(brew --prefix)/opt/coreutils/libexec/gnubin"
     __profile__unshiftpath "$(brew --prefix)/opt/findutils/libexec/gnubin"
   fi
+  __profile__unshiftpath "$(brew --prefix)/opt/libgxps/bin"
 fi
 
 # pyenv
