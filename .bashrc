@@ -1,34 +1,40 @@
 [[ $- = *i* ]] || return
 
+__profile__os="$(uname -s)"
+
 __bashrc__source() {
   [[ -f $1 ]] && . "$1"
 }
 
+if [[ $__profile__os = Darwin ]]; then
+  alias cp='/bin/cp -ci'
+else
+  alias cp='\cp -i'
+fi
+
 if type dircolors >/dev/null 2>&1; then
   [[ -r $HOME/.dircolors ]] && eval "$(dircolors -b "$HOME/.dircolors")" || eval "$(dircolors -b)"
-  alias diff='diff --color=auto'
-  alias grep='grep --color=auto'
-  alias ls='ls --color=auto'
-  alias tree='tree -C'
+  alias ls='\ls --color=auto'
+  alias grep='\grep --color=auto'
 fi
 
 alias :q=exit
-alias cp='cp -i'
+alias ..='\cd ..'
+alias ll='ls -lAF'
+alias mkdir='\mkdir -p'
+alias mv='\mv -i'
+alias rename='\rename -v'
+alias jobs='\jobs -l'
+alias mvn='\mvn -e'
+alias mvnw='./mvnw -e'
+
 alias gs='git status'
-alias jobs='jobs -l'
 alias kc=kubectx
 alias kn=kubens
-alias l.='ls -dF .*'
-alias ll='ls -lF'
-alias mkdir='mkdir -p'
-alias mv='mv -i'
-alias rename='rename -v'
 
 alias path='printf "$PATH\n" | tr : \\n'
-alias crlf2lf='nkf --overwrite -Lu'
-alias lf2crlf='nkf --overwrite -Lw'
-alias bom-utf8='nkf --overwrite --ic=UTF-8 --oc=UTF-8-BOM'
-alias unbom-utf8='nkf --overwrite --ic=UTF-8-BOM --ic=UTF-8'
+alias jgrep='grep -n -r --include=*.java --exclude-dir={build,target,test}'
+alias tsgrep='grep -n -r --include={*.ts,*.tsx} --exclude-dir={dist,node_modules}'
 
 # bash-completiion
 type brew >/dev/null 2>&1 && __bashrc__source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
@@ -37,7 +43,7 @@ type brew >/dev/null 2>&1 && __bashrc__source "$(brew --prefix)/etc/profile.d/ba
 # environment variables for interactive shell
 #
 export HISTCONTROL=ignorespace:erasedups
-export HISTIGNORE=gs:kc:kn:l.:ll:ls:tig
+export HISTIGNORE=date:gs:kc:kn:ll:ls:pbpaste:pwd:tig:top:tree
 export HISTTIMEFORMAT='%F %T '
 export HISTSIZE=131072
 export PROMPT_DIRTRIM=2
@@ -67,3 +73,4 @@ ticks() {
 }
 
 unset -f __bashrc__source
+unset -v __profile__os
