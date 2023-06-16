@@ -39,6 +39,13 @@ alias path='printf "$PATH\n" | tr : \\n'
 alias jgrep='grep -n -r --include=*.java --exclude-dir={build,target,test}'
 alias tsgrep='grep -n -r --include={*.ts,*.tsx} --exclude-dir={dist,node_modules}'
 
+if [[ "$__profile__os" != Darwin ]]; then
+  if type xclip >/dev/null 2>&1; then
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -o -selection clipboard'
+  fi
+fi
+
 __bashrc__source "$HOME/.bash_aliases"
 
 # bash-completiion
