@@ -75,6 +75,11 @@ if [[ $TERM = xterm-color ]] || [[ $TERM = *-256color ]]; then
   fi
 fi
 
+# sdkman
+if [[ -n $SDKMAN_DIR ]]; then
+  __bashrc__source "$SDKMAN_DIR/bin/sdkman-init.sh"
+fi
+
 # mkdir and cd
 mkcd() {
   mkdir -p "$@" && cd "$1"
