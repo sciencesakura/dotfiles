@@ -10,7 +10,11 @@ set smartcase
 set splitbelow
 set tabstop=2
 if has('clipboard')
-  set clipboard=unnamed
+  if has('unnamedplus')
+    set clipboard^=unnamedplus
+  else
+    set clipboard^=unnamed
+  endif
 endif
 if has('cmdline_info')
   set ruler
