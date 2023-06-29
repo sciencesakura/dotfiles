@@ -77,13 +77,16 @@ fi
 
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-		"lan_ip #84a0c6 #161821 ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}" \
-		"wan_ip #84a0c6 #161821" \
+		"hostname #84a0c6 #161821 ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}" \
+		"lan_ip #84a0c6 #161821" \
 		"tmux_session_info #2e313f #6b7089" \
 	)
 fi
 
 if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
+    "k8s_namespace #e2a478 #161821" \
+    "k8s_context #e2a478 #161821 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
+    "gcloud_active_config #e27878 #161821" \
 	)
 fi
