@@ -42,7 +42,7 @@ alias tsgrep='grep -n -r --include={*.ts,*.tsx} --exclude-dir={dist,node_modules
 if [[ "$__profile__os" != Darwin ]]; then
   if type xclip >/dev/null 2>&1; then
     alias pbcopy='xclip -r -selection clipboard'
-    alias pbpaste='xclip -o -selection clipboard'
+    alias pbpaste='xclip -o -r -selection clipboard'
   fi
 fi
 
