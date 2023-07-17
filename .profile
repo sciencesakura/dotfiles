@@ -36,9 +36,7 @@ __profile__unshiftpath() {
 }
 
 export LANG=en_US.UTF-8
-if type vim >/dev/null 2>&1; then
-  export EDITOR=vim
-fi
+export EDITOR=vim
 
 # freedesktop.org
 [ -z "$XDG_CACHE_HOME"  ] && export XDG_CACHE_HOME="$HOME/.cache"
