@@ -56,6 +56,8 @@ if [ "$__profile__os" = Darwin ]; then
     export HOMEBREW_NO_INSTALL_CLEANUP=1
     __profile__unshiftpath "$(brew --prefix)/opt/coreutils/libexec/gnubin"
     __profile__unshiftpath "$(brew --prefix)/opt/findutils/libexec/gnubin"
+    __profile__unshiftpath "$(brew --prefix)/opt/gnu-sed/libexec/gnubin"
+    __profile__unshiftpath "$(brew --prefix)/opt/grep/libexec/gnubin"
   fi
 fi
 
