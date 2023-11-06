@@ -27,8 +27,6 @@ fi
 alias mv='\mv -i'
 alias rename='\rename -v'
 alias jobs='\jobs -l'
-alias mvn='\mvn -e'
-alias mvnw='./mvnw -e'
 
 alias gs='git status'
 alias kc=kubectx
@@ -48,8 +46,6 @@ fi
 
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias path='printf "$PATH\n" | tr : \\n'
-alias jgrep='grep -n -r --include=*.java --exclude-dir={build,target,test}'
-alias tsgrep='grep -n -r --include={*.ts,*.tsx} --exclude-dir={dist,node_modules}'
 
 if [[ "$__profile__os" != Darwin ]]; then
   if type xclip >/dev/null 2>&1; then
