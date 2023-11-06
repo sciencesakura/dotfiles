@@ -1,6 +1,0 @@
-user	repo	name
-homebrew	core	gradle
-homebrew	core	gradle-completion
-homebrew	cask	jdk-mission-control
-homebrew	core	maven
-homebrew	core	maven-completion
