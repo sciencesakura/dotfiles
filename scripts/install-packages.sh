@@ -8,9 +8,10 @@ if [ -z "$pmname" ]; then
   exit 1
 fi
 
-ostype="$(uname -a)"
+ostype="$(uname -s)"
 case "$ostype" in
   Darwin*) ostype=osx;;
+  Linux*) ostype=linux;;
   *) ;;
 esac
 
@@ -29,12 +30,12 @@ do_install() {
 }
 
 if [ -z "$2" ]; then
-  for e in $(ls "$packdir"/*.tsv); do
+  for e in $(ls "$packdir"/*.txt); do
     do_install "$e"
   done
 else
   for e in $@; do
     [ "$e" = "$pmname" ] && continue
-    do_install "$packdir/$e.tsv"
+    do_install "$packdir/$e.txt"
   done
 fi
