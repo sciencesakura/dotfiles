@@ -43,6 +43,9 @@ hook_add = '''
 repo='Shougo/context_filetype.vim'
 
 [[plugins]]
+repo='github/copilot.vim'
+
+[[plugins]]
 repo = 'sciencesakura/cql-vim'
 lazy = true
 on_ft = ['cql']
