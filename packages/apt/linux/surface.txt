@@ -27,6 +27,7 @@ libperl-dev
 libpython3-dev
 libreoffice
 libtool-bin
+libxml2-utils
 libxt-dev
 manpages-dev
 mozc-utils-gui
