@@ -22,6 +22,7 @@ homebrew/core/lab
 homebrew/core/maven-completion
 homebrew/core/nkf
 homebrew/core/num-utils
+homebrew/core/opam
 homebrew/core/pstree
 homebrew/core/rename
 homebrew/core/sevenzip
@@ -42,5 +43,5 @@ homebrew/cask/jetbrains-toolbox
 homebrew/cask/slack
 homebrew/cask/tableplus
 homebrew/cask/visual-studio-code
-mike-engel/jwt-cli/jwt-cli
 harelba/q/q
+mike-engel/jwt-cli/jwt-cli

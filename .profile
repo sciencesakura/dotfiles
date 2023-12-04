@@ -2,7 +2,7 @@ __profile__os="$(uname -s)"
 __profile__arch="$(uname -m)"
 
 __profile__source() {
-  [ -r "$1" ] && . "$1"
+  [ -r "$1" ] && . "$1" >/dev/null 2>&1
 }
 
 __profile__testpathcontains() {
@@ -74,6 +74,8 @@ fi
 
 # ghcp
 export GHCUP_USE_XDG_DIRS=1
+
+__profile__source "$HOME/.opam/opam-init/init.sh"
 
 __profile__unshiftpath "$HOME/bin"
 __profile__unshiftpath "$HOME/.local/bin"
