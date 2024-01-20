@@ -19,23 +19,23 @@ fi
 #
 # aliases
 #
-if [[ $__profile__os = Linux ]]; then
-  alias pbcopy='xclip -r -selection clipboard'
-  alias pbpaste='xclip -o -r -selection clipboard'
-elif [[ $__profile__os = Darwin ]]; then
-  alias cp='/bin/cp -c'
-  type ggrep &>/dev/null && alias grep=ggrep
+if [[ $__profile__os = Darwin ]]; then
+  alias cp='/bin/cp -civ'
+  type ggrep &>/dev/null && alias grep='ggrep --color=auto' || alias grep='grep --color=auto'
   type gfind &>/dev/null && alias find=gfind
   type gsed &>/dev/null && alias sed=gsed
   type gxargs &>/dev/null && alias xargs=gxargs
+else
+  alias cp='cp -iv'
+  alias grep='grep --color=auto'
+  alias pbcopy='xclip -r -selection clipboard'
+  alias pbpaste='xclip -o -r -selection clipboard'
 fi
 
 alias ..='cd ..'
 alias :q=exit
-alias cp='cp -i -v'
 alias df='df -h'
 alias du='du -h'
-alias grep='grep --color=auto'
 alias gs='git status'
 alias ip='ip --color=auto'
 alias jobs='jobs -l'
@@ -43,11 +43,11 @@ alias kc=kubectx
 alias kn=kubens
 alias ls='ls --color=auto'
 alias ll='ls -lAF'
-alias mkdir='mkdir -p -v'
-alias mv='mv -i -v'
+alias mkdir='mkdir -pv'
+alias mv='mv -iv'
 alias path='printf "$PATH\n" | tr : \\n'
 alias rename='rename -v'
-alias rm='rm -i -v'
+alias rm='rm -iv'
 
 if [[ -e /etc/debian_version ]]; then
   alias dateadd=dateutils.dadd
