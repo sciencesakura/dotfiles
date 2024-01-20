@@ -1,36 +1,54 @@
 [[ $- = *i* ]] || return
 
-__profile__os="$(uname -s)"
+__profile__os="${__os:-$(uname -s)}"
 
 __bashrc__source() {
-  [[ -f $1 ]] && . "$1"
+  [[ -r $1 ]] && . "$1"
 }
 
 shopt -s checkwinsize
 shopt -s histappend
 
-if type dircolors >/dev/null 2>&1; then
+#
+# colors
+#
+if type dircolors &>/dev/null; then
   [[ -r $HOME/.dircolors ]] && eval "$(dircolors -b "$HOME/.dircolors")" || eval "$(dircolors -b)"
-  alias ls='\ls --color=auto'
-  alias grep='\grep --color=auto'
 fi
 
+#
+# aliases
+#
+if [[ $__profile__os = Linux ]]; then
+  alias pbcopy='xclip -r -selection clipboard'
+  alias pbpaste='xclip -o -r -selection clipboard'
+elif [[ $__profile__os = Darwin ]]; then
+  alias cp='/bin/cp -c'
+  type ggrep &>/dev/null && alias grep=ggrep
+  type gfind &>/dev/null && alias find=gfind
+  type gsed &>/dev/null && alias sed=gsed
+  type gxargs &>/dev/null && alias xargs=gxargs
+fi
+
+alias ..='cd ..'
 alias :q=exit
-alias ..='\cd ..'
-alias ll='ls -lAF'
-alias mkdir='\mkdir -p'
-if [[ $__profile__os = Darwin ]]; then
-  alias cp='/bin/cp -ci'
-else
-  alias cp='\cp -i'
-fi
-alias mv='\mv -i'
-alias rename='\rename -v'
-alias jobs='\jobs -l'
-
+alias cp='cp -i -v'
+alias df='df -h'
+alias du='du -h'
+alias grep='grep --color=auto'
 alias gs='git status'
+alias ip='ip --color=auto'
+alias jobs='jobs -l'
 alias kc=kubectx
 alias kn=kubens
+alias ls='ls --color=auto'
+alias ll='ls -lAF'
+alias mkdir='mkdir -p -v'
+alias mv='mv -i -v'
+alias path='printf "$PATH\n" | tr : \\n'
+alias rename='rename -v'
+alias rm='rm -i -v'
+
 if [[ -e /etc/debian_version ]]; then
   alias dateadd=dateutils.dadd
   alias dateconv=dateutils.dconv
@@ -44,54 +62,49 @@ if [[ -e /etc/debian_version ]]; then
   alias strptime=dateutils.strptime
 fi
 
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-alias path='printf "$PATH\n" | tr : \\n'
-
-if [[ "$__profile__os" != Darwin ]]; then
-  if type xclip >/dev/null 2>&1; then
-    alias pbcopy='xclip -r -selection clipboard'
-    alias pbpaste='xclip -o -r -selection clipboard'
-  fi
-fi
-
 __bashrc__source "$HOME/.bash_aliases"
 
-# bash-completiion
-if ! shopt -oq posix; then
-  if type brew >/dev/null 2>&1; then
-    __bashrc__source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-  elif [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+#
+# functions
+#
+mkcd() {
+  \mkdir -p "$@" && \cd "$1"
+}
+
+#
+# completiion
+#
+if [[ -z $BASH_COMPLETION_VERSINFO ]]; then
+  __bashrc__source /usr/share/bash-completion/bash_completion \
+    || __bashrc__source /etc/bash_completion \
+    || __bashrc__source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 fi
 
-# environment variables for interactive shell
-export HISTCONTROL=ignorespace:erasedups
-export HISTIGNORE=date:gs:jobs:kc:kn:ll:ls:pwd:tig:top:tree
-export HISTTIMEFORMAT='%F %T '
-export HISTSIZE=131072
-export PROMPT_DIRTRIM=2
-
+#
 # prompt
+#
 if [[ $TERM = xterm-color ]] || [[ $TERM = *-256color ]]; then
-  if type __git_ps1 >/dev/null 2>&1; then
+  if type __git_ps1 &>/dev/null; then
     export PS1='\[\e[33m\]\u\[\e[m\]@\[\e[32m\]\h\[\e[m\] \[\e[1;34m\]\w\[\e[1;31m\]$(__git_ps1)\[\e[m\]$ '
   else
     export PS1='\[\e[33m\]\u\[\e[m\]@\[\e[32m\]\h\[\e[m\] \[\e[1;34m\]\w\[\e[m\]$ '
   fi
 fi
+export PROMPT_DIRTRIM=2
 
-# sdkman
-if [[ -n $SDKMAN_DIR ]]; then
-  __bashrc__source "$SDKMAN_DIR/bin/sdkman-init.sh"
-fi
+#
+# history
+#
+export HISTCONTROL=ignoreboth
+export HISTIGNORE=date:gs:jobs:kc:kn:ll:ls:pwd:tig:top:tree
+export HISTTIMEFORMAT='%F %T '
+export HISTSIZE=131072
 
-# mkdir and cd
-mkcd() {
-  mkdir -p "$@" && cd "$1"
-}
+#
+# others
+#
+__bashrc__source "$SDKMAN_DIR/bin/sdkman-init.sh"
+__bashrc__source "$HOME/.bashrc.local"
 
 unset -f __bashrc__source
 unset -v __profile__os

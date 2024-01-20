@@ -1,8 +1,8 @@
-__profile__os="$(uname -s)"
-__profile__arch="$(uname -m)"
+__profile__os="${__os:-$(uname -s)}"
+__profile__arch="${__arch:-$(uname -m)}"
 
 __profile__source() {
-  [ -r "$1" ] && . "$1" >/dev/null 2>&1
+  [ -r "$1" ] && . "$1"
 }
 
 __profile__testpathcontains() {
@@ -36,49 +36,53 @@ __profile__unshiftpath() {
 }
 
 export LANG=en_US.UTF-8
+export LESS='-R --use-color -Dd+r$Du+b'
 export EDITOR=vim
 
+#
 # freedesktop.org
+#
 [ -z "$XDG_CACHE_HOME"  ] && export XDG_CACHE_HOME="$HOME/.cache"
 [ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config"
 [ -z "$XDG_DATA_HOME"   ] && export XDG_DATA_HOME="$HOME/.local/share"
 [ -z "$XDG_STATE_HOME"  ] && export XDG_STATE_HOME="$HOME/.local/state"
 
+#
 # homebrew
+#
 if [ "$__profile__os" = Darwin ]; then
   if [ "$__profile__arch" = arm64 ] && [ -x /opt/homebrew/bin/brew ]; then
-    eval $(/opt/homebrew/bin/brew shellenv)
+    eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
-  if type brew >/dev/null 2>&1; then
-    export HOMEBREW_AUTOREMOVE=1
-    export HOMEBREW_NO_ANALYTICS=1
-    export HOMEBREW_NO_AUTO_UPDATE=1
-    __profile__unshiftpath "$(brew --prefix)/opt/findutils/libexec/gnubin"
-    __profile__unshiftpath "$(brew --prefix)/opt/gnu-sed/libexec/gnubin"
-    __profile__unshiftpath "$(brew --prefix)/opt/grep/libexec/gnubin"
-    __profile__unshiftpath "$(brew --prefix)/opt/coreutils/libexec/gnubin"
-  fi
+  export HOMEBREW_AUTOREMOVE=1
+  export HOMEBREW_NO_ANALYTICS=1
+  export HOMEBREW_NO_AUTO_UPDATE=1
+  export HOMEBREW_NO_INSTALL_CLEANUP=1
+  __profile__unshiftpath "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
 fi
 
-# sdkman
+#
+# java
+#
 if [ -d "$XDG_CONFIG_HOME/sdkman" ]; then
   export SDKMAN_DIR="$XDG_CONFIG_HOME/sdkman"
   __profile__source "$SDKMAN_DIR/bin/sdkman-init.sh"
 fi
 
-# volta
+#
+# node.js
+#
 if [ -d "$XDG_CONFIG_HOME/volta" ]; then
   export VOLTA_HOME="$XDG_CONFIG_HOME/volta"
-  __profile__unshiftpath "$VOLTA_HOME/bin"
+  __profile__pushpath "$VOLTA_HOME/bin"
 fi
 
-# ghcp
+#
+# others
+#
 export GHCUP_USE_XDG_DIRS=1
-
 __profile__source "$HOME/.opam/opam-init/init.sh"
-
 __profile__source "$HOME/.profile.local"
-
 __profile__unshiftpath "$HOME/bin"
 __profile__unshiftpath "$HOME/.local/bin"
 

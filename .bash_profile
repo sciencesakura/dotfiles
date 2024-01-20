@@ -1,3 +1,6 @@
+__os="$(uname -s)"
+__arch="$(uname -m)"
+
 __bash_profile__source() {
   [[ -r $1 ]] && . "$1"
 }
@@ -12,8 +15,11 @@ __bash_profile__source "$HOME/.profile"
 #
 __bash_profile__source "$HOME/.bashrc"
 
-# add gcloud components to PATH
-type brew &> /dev/null && \
-  __bash_profile__source "$(brew --prefix)/share/google-cloud-sdk/path.bash.inc"
+#
+# others
+#
+__bash_profile__source "$HOMEBREW_PREFIX/share/google-cloud-sdk/path.bash.inc"
+__bash_profile__source "$HOME/.bash_profile.local"
 
 unset -f __bash_profile__source
+unset -v __arch __os
