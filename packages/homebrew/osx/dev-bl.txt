@@ -7,6 +7,9 @@ homebrew/core/cmake
 homebrew/core/coreutils
 homebrew/core/csvkit
 homebrew/core/dateutils
+homebrew/core/docker
+homebrew/core/docker-compose
+homebrew/core/docker-credential-helper
 homebrew/core/ffmpeg
 homebrew/core/findutils
 homebrew/core/fzf
@@ -19,6 +22,7 @@ homebrew/core/jq
 homebrew/core/kubectx
 homebrew/core/kubernetes-cli
 homebrew/core/lab
+homebrew/core/lima
 homebrew/core/maven-completion
 homebrew/core/nkf
 homebrew/core/num-utils
@@ -34,7 +38,6 @@ homebrew/core/vim
 homebrew/core/volta
 homebrew/core/wxwidgets
 homebrew/core/yq
-homebrew/cask/docker
 homebrew/cask/font-udev-gothic
 homebrew/cask/font-udev-gothic-nf
 homebrew/cask/google-cloud-sdk

@@ -77,6 +77,8 @@ export GHCUP_USE_XDG_DIRS=1
 
 __profile__source "$HOME/.opam/opam-init/init.sh"
 
+__profile__source "$HOME/.profile.local"
+
 __profile__unshiftpath "$HOME/bin"
 __profile__unshiftpath "$HOME/.local/bin"
 
