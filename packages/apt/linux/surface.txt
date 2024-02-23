@@ -5,6 +5,7 @@ build-essential
 clangd
 cmake
 csvkit
+csvtool
 curl
 dateutils
 docker-buildx-plugin
@@ -35,6 +36,7 @@ nkf
 num-utils
 onedrive
 python3-venv
+rs
 ruby-dev
 tableplus
 tig
