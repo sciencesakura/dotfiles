@@ -21,7 +21,6 @@ gtkwave
 ibus-mozc
 icdiff
 iverilog
-jmeter
 jq
 libfl-dev
 libfuse2
@@ -40,11 +39,9 @@ onedrive
 python3-venv
 rs
 ruby-dev
-tableplus
 tig
 tmpreaper
 tmux
 tmux-plugin-manager
 tree
 xclip
-yq
