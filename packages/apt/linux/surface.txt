@@ -17,8 +17,10 @@ gettext
 gh
 git
 gnupg
+gtkwave
 ibus-mozc
 icdiff
+iverilog
 jmeter
 jq
 libfl-dev
