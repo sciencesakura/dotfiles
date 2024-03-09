@@ -69,6 +69,11 @@ on_ft = ['html', 'xml']
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
+hook_add = '''
+  cnoremap <silent> <C-f> :Rg<CR>
+  cnoremap <silent> <C-o> :GFiles<CR>
+  cnoremap <silent> <C-r> :History:<CR>
+'''
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'

@@ -1,6 +1,7 @@
 homebrew/core/automake
 homebrew/core/bash
 homebrew/core/bash-completion@2
+homebrew/core/bat
 homebrew/core/bazel
 homebrew/core/chmlib
 homebrew/core/cmake
@@ -29,6 +30,7 @@ homebrew/core/num-utils
 homebrew/core/opam
 homebrew/core/pstree
 homebrew/core/rename
+homebrew/core/ripgrep
 homebrew/core/sevenzip
 homebrew/core/tig
 homebrew/core/tmpwatch

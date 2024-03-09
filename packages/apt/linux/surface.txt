@@ -1,5 +1,6 @@
 7zip
 automake
+bat
 bison
 build-essential
 clangd
@@ -38,6 +39,7 @@ nkf
 num-utils
 onedrive
 python3-venv
+ripgrep
 rs
 ruby-dev
 tig
