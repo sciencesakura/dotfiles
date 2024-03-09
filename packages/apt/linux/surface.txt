@@ -13,6 +13,7 @@ docker-ce
 docker-compose-plugin
 flex
 fonts-noto
+fzf
 gettext
 gh
 git

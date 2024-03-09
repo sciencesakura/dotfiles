@@ -76,6 +76,13 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'junegunn/fzf'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = ['fzf']
+
+[[plugins]]
 repo = 'cocopon/iceberg.vim'
 hook_add = '''
   colorscheme iceberg
