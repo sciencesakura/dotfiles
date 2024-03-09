@@ -34,6 +34,8 @@ if has('syntax')
   set spelllang=en,cjk
 endif
 
+set <S-F6>=[17;2~
+
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
@@ -66,8 +68,6 @@ if v:version >= 900
     set spelloptions=camel
   endif
 endif
-
-let g:c_syntax_for_h = 1
 
 "fzf
 if isdirectory('/usr/share/doc/fzf/examples')
@@ -105,16 +105,12 @@ syntax enable
 
 "vim-lsp
 function! s:on_lsp_buffer_enabled() abort
-  nmap <buffer> gd <plug>(lsp-definition)
-  nmap <buffer> gs <plug>(lsp-document-symbol-search)
-  nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
-  nmap <buffer> gr <plug>(lsp-references)
-  nmap <buffer> gi <plug>(lsp-implementation)
-  nmap <buffer> gt <plug>(lsp-type-definition)
-  nmap <buffer> <F2> <plug>(lsp-rename)
-  nmap <buffer> [g <plug>(lsp-previous-diagnostic)
-  nmap <buffer> ]g <plug>(lsp-next-diagnostic)
-  nmap <buffer> K <plug>(lsp-hover)
+  nnoremap <buffer> B <plug>(lsp-definition)
+  nnoremap <buffer> <F7> <plug>(lsp-references)
+  nnoremap <buffer> <S-F6> <plug>(lsp-rename)
+  nnoremap <buffer> <S-F2> <plug>(lsp-previous-diagnostic)
+  nnoremap <buffer> <F2> <plug>(lsp-next-diagnostic)
+  nnoremap <buffer> <F1> <plug>(lsp-hover)
 endfunction
 
 augroup lsp_install

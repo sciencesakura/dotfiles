@@ -33,10 +33,10 @@ repo = 'prabirshrestha/asyncomplete.vim'
 repo = 'tyru/caw.vim'
 hook_add = '''
   let g:caw_no_default_keymappings = 1
-  nmap <silent> gcc <plug>(caw:hatpos:toggle)
-  xmap <silent> gcc <plug>(caw:hatpos:toggle)
-  nmap <silent> gcw <plug>(caw:wrap:toggle)
-  xmap <silent> gcw <plug>(caw:wrap:toggle)
+  nnoremap <silent> <C-_> <plug>(caw:hatpos:toggle)
+  xnoremap <silent> <C-_> <plug>(caw:hatpos:toggle)
+  nnoremap <silent> <C-BSlash> <plug>(caw:wrap:toggle)
+  xnoremap <silent> <C-BSlash> <plug>(caw:wrap:toggle)
 '''
 
 [[plugins]]
