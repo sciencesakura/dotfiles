@@ -68,14 +68,6 @@ lazy = true
 on_ft = ['html', 'xml']
 
 [[plugins]]
-repo = 'shumphrey/fugitive-gitlab.vim'
-depends = ['vim-fugitive']
-hook_add = '''
-  " Add private GitLab host
-  " let g:fugitive_gitlab_domains = []
-'''
-
-[[plugins]]
 repo = 'junegunn/fzf'
 
 [[plugins]]

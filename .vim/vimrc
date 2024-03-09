@@ -79,6 +79,9 @@ if isdirectory(s:DEIN_REPODIR)
   if dein#load_state(s:DEIN_HOME)
     call dein#begin(s:DEIN_HOME)
     call dein#load_toml(expand('$HOME/.vim/dein.toml'))
+    if filereadable(expand('$HOME/.vim/dein.local.toml'))
+      call dein#load_toml(expand('$HOME/.vim/dein.local.toml'))
+    endif
     call dein#end()
     call dein#save_state()
   endif
