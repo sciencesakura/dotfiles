@@ -69,6 +69,13 @@ endif
 
 let g:c_syntax_for_h = 1
 
+"fzf
+if isdirectory('/usr/share/doc/fzf/examples')
+  set runtimepath^=/usr/share/doc/fzf/examples
+elseif isdirectory(expand('$HOMEBREW_PREFIX/opt/fzf'))
+  execute 'set runtimepath^=' . expand('$HOMEBREW_PREFIX/opt/fzf')
+endif
+
 "dein Scripts-----------------------------
 let s:DEIN_HOME = expand('$HOME/.cache/dein')
 let s:DEIN_REPODIR = s:DEIN_HOME . '/repos/github.com/Shougo/dein.vim'

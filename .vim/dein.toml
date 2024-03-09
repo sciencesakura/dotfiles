@@ -68,11 +68,7 @@ lazy = true
 on_ft = ['html', 'xml']
 
 [[plugins]]
-repo = 'junegunn/fzf'
-
-[[plugins]]
 repo = 'junegunn/fzf.vim'
-depends = ['fzf']
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
