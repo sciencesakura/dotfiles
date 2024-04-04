@@ -78,6 +78,13 @@ if [ -d "$XDG_CONFIG_HOME/volta" ]; then
 fi
 
 #
+# rust
+#
+export RUSTUP_HOME="$XDG_CONFIG_HOME/rustup"
+export CARGO_HOME="$XDG_CONFIG_HOME/cargo"
+__profile__pushpath "$CARGO_HOME/bin"
+
+#
 # others
 #
 export GHCUP_USE_XDG_DIRS=1
