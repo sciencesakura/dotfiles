@@ -41,6 +41,7 @@ export EDITOR=vim
 
 #
 # freedesktop.org
+# https://www.freedesktop.org/
 #
 [ -z "$XDG_CACHE_HOME"  ] && export XDG_CACHE_HOME="$HOME/.cache"
 [ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config"
@@ -48,7 +49,8 @@ export EDITOR=vim
 [ -z "$XDG_STATE_HOME"  ] && export XDG_STATE_HOME="$HOME/.local/state"
 
 #
-# homebrew
+# Homebrew
+# https://docs.brew.sh/
 #
 if [ "$__profile__os" = Darwin ]; then
   if [ "$__profile__arch" = arm64 ] && [ -x /opt/homebrew/bin/brew ]; then
@@ -62,33 +64,39 @@ if [ "$__profile__os" = Darwin ]; then
 fi
 
 #
-# java
+# SDKMAN!
+# https://sdkman.io/
 #
-if [ -d "$XDG_CONFIG_HOME/sdkman" ]; then
-  export SDKMAN_DIR="$XDG_CONFIG_HOME/sdkman"
-  __profile__source "$SDKMAN_DIR/bin/sdkman-init.sh"
-fi
+export SDKMAN_DIR="$XDG_CONFIG_HOME/sdkman"
+__profile__source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
 #
-# node.js
+# Volta
+# https://volta.sh/
 #
-if [ -d "$XDG_CONFIG_HOME/volta" ]; then
-  export VOLTA_HOME="$XDG_CONFIG_HOME/volta"
-  __profile__pushpath "$VOLTA_HOME/bin"
-fi
+export VOLTA_HOME="$XDG_CONFIG_HOME/volta"
+__profile__pushpath "$VOLTA_HOME/bin"
 
 #
-# rust
+# Rustup
+# https://rust-lang.github.io/rustup/
 #
 export RUSTUP_HOME="$XDG_CONFIG_HOME/rustup"
 export CARGO_HOME="$XDG_CONFIG_HOME/cargo"
 __profile__pushpath "$CARGO_HOME/bin"
 
 #
-# others
+# GHCup
+# https://www.haskell.org/ghcup/
 #
 export GHCUP_USE_XDG_DIRS=1
+
+#
+# Opam
+# https://opam.ocaml.org/
+#
 __profile__source "$HOME/.opam/opam-init/init.sh"
+
 __profile__source "$HOME/.profile.local"
 __profile__unshiftpath "$HOME/bin"
 __profile__unshiftpath "$HOME/.local/bin"
