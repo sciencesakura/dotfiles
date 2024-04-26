@@ -86,6 +86,13 @@ export CARGO_HOME="$XDG_CONFIG_HOME/cargo"
 __profile__pushpath "$CARGO_HOME/bin"
 
 #
+# Pyenv
+# https://github.com/pyenv/pyenv
+#
+export PYENV_ROOT="$XDG_CONFIG_HOME/pyenv"
+__profile__pushpath "$PYENV_ROOT/bin"
+
+#
 # GHCup
 # https://www.haskell.org/ghcup/
 #
