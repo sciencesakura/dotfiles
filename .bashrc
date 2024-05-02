@@ -113,6 +113,7 @@ __bashrc__source "$XDG_CONFIG_HOME/fzf/fzf.bash" \
 # others
 #
 type pyenv &>/dev/null && eval "$(pyenv init -)"
+type rbenv &>/dev/null && eval "$(rbenv init -)"
 __bashrc__source "$SDKMAN_DIR/bin/sdkman-init.sh"
 __bashrc__source "$HOME/.bashrc.local"
 

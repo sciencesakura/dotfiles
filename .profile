@@ -68,7 +68,6 @@ fi
 # https://sdkman.io/
 #
 export SDKMAN_DIR="$XDG_CONFIG_HOME/sdkman"
-__profile__source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
 #
 # Volta
@@ -76,6 +75,12 @@ __profile__source "$SDKMAN_DIR/bin/sdkman-init.sh"
 #
 export VOLTA_HOME="$XDG_CONFIG_HOME/volta"
 __profile__pushpath "$VOLTA_HOME/bin"
+
+#
+# rbenv
+# https://github.com/rbenv/rbenv
+#
+export RBENV_ROOT="$XDG_CONFIG_HOME/rbenv"
 
 #
 # Rustup
