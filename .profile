@@ -12,12 +12,6 @@ __profile__testpathcontains() {
   esac
 }
 
-__profile__pushpath() {
-  [ -d "$1" ] || return
-  __profile__testpathcontains "$1" && return
-  export PATH="$PATH:$1"
-}
-
 __profile__unshiftpath() {
   [ -d "$1" ] || return
   if __profile__testpathcontains "$1"; then
@@ -74,7 +68,7 @@ export SDKMAN_DIR="$XDG_CONFIG_HOME/sdkman"
 # https://volta.sh/
 #
 export VOLTA_HOME="$XDG_CONFIG_HOME/volta"
-__profile__pushpath "$VOLTA_HOME/bin"
+__profile__unshiftpath "$VOLTA_HOME/bin"
 
 #
 # rbenv
@@ -83,19 +77,19 @@ __profile__pushpath "$VOLTA_HOME/bin"
 export RBENV_ROOT="$XDG_CONFIG_HOME/rbenv"
 
 #
-# Rustup
+# rustup
 # https://rust-lang.github.io/rustup/
 #
 export RUSTUP_HOME="$XDG_CONFIG_HOME/rustup"
 export CARGO_HOME="$XDG_CONFIG_HOME/cargo"
-__profile__pushpath "$CARGO_HOME/bin"
+__profile__unshiftpath "$CARGO_HOME/bin"
 
 #
-# Pyenv
+# pyenv
 # https://github.com/pyenv/pyenv
 #
 export PYENV_ROOT="$XDG_CONFIG_HOME/pyenv"
-__profile__pushpath "$PYENV_ROOT/bin"
+__profile__unshiftpath "$PYENV_ROOT/bin"
 
 #
 # GHCup
@@ -104,7 +98,7 @@ __profile__pushpath "$PYENV_ROOT/bin"
 export GHCUP_USE_XDG_DIRS=1
 
 #
-# Opam
+# OPAM
 # https://opam.ocaml.org/
 #
 __profile__source "$HOME/.opam/opam-init/init.sh"
@@ -113,5 +107,5 @@ __profile__source "$HOME/.profile.local"
 __profile__unshiftpath "$HOME/bin"
 __profile__unshiftpath "$HOME/.local/bin"
 
-unset -f __profile__unshiftpath __profile__pushpath __profile__testpathcontains __profile__source
+unset -f __profile__unshiftpath __profile__testpathcontains __profile__source
 unset -v e WKPATH WKIFS __profile__arch __profile__os
