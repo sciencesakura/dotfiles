@@ -58,38 +58,19 @@ if [ "$__profile__os" = Darwin ]; then
 fi
 
 #
-# SDKMAN!
-# https://sdkman.io/
-#
-export SDKMAN_DIR="$XDG_CONFIG_HOME/sdkman"
-
-#
 # Volta
 # https://volta.sh/
 #
-export VOLTA_HOME="$XDG_CONFIG_HOME/volta"
+export VOLTA_HOME="$HOME/.local/volta"
 __profile__unshiftpath "$VOLTA_HOME/bin"
-
-#
-# rbenv
-# https://github.com/rbenv/rbenv
-#
-export RBENV_ROOT="$XDG_CONFIG_HOME/rbenv"
 
 #
 # rustup
 # https://rust-lang.github.io/rustup/
 #
-export RUSTUP_HOME="$XDG_CONFIG_HOME/rustup"
-export CARGO_HOME="$XDG_CONFIG_HOME/cargo"
+export RUSTUP_HOME="$HOME/.local/rustup"
+export CARGO_HOME="$HOME/.local/cargo"
 __profile__unshiftpath "$CARGO_HOME/bin"
-
-#
-# pyenv
-# https://github.com/pyenv/pyenv
-#
-export PYENV_ROOT="$XDG_CONFIG_HOME/pyenv"
-__profile__unshiftpath "$PYENV_ROOT/bin"
 
 #
 # GHCup
@@ -97,14 +78,7 @@ __profile__unshiftpath "$PYENV_ROOT/bin"
 #
 export GHCUP_USE_XDG_DIRS=1
 
-#
-# OPAM
-# https://opam.ocaml.org/
-#
-__profile__source "$HOME/.opam/opam-init/init.sh"
-
 __profile__source "$HOME/.profile.local"
-__profile__unshiftpath "$HOME/bin"
 __profile__unshiftpath "$HOME/.local/bin"
 
 unset -f __profile__unshiftpath __profile__testpathcontains __profile__source

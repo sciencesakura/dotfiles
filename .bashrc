@@ -110,11 +110,36 @@ __bashrc__source "$XDG_CONFIG_HOME/fzf/fzf.bash" \
   || __bashrc__source /usr/share/doc/fzf/examples/key-bindings.bash
 
 #
+# SDKMAN!
+# https://sdkman.io/
+#
+export SDKMAN_DIR="$HOME/.local/sdkman"
+__bashrc__source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+#
+# rbenv
+# https://github.com/rbenv/rbenv
+#
+export RBENV_ROOT="$HOME/.local/rbenv"
+type rbenv &>/dev/null && eval "$(rbenv init -)"
+
+#
+# pyenv
+# https://github.com/pyenv/pyenv
+#
+export PYENV_ROOT="$HOME/.local/pyenv"
+type pyenv &>/dev/null && eval "$(pyenv init -)"
+
+#
+# opam
+# https://opam.ocaml.org/
+#
+export OPAMROOT="$HOME/.local/opam"
+__bashrc__source "$OPAMROOT/opam-init/init.sh"
+
+#
 # others
 #
-type pyenv &>/dev/null && eval "$(pyenv init -)"
-type rbenv &>/dev/null && eval "$(rbenv init -)"
-__bashrc__source "$SDKMAN_DIR/bin/sdkman-init.sh"
 __bashrc__source "$HOME/.bashrc.local"
 
 unset -f __bashrc__source
