@@ -101,9 +101,10 @@ export HISTSIZE=131072
 #
 # fzf
 #
-export FZF_DEFAULT_OPTS='--cycle'
+export FZF_DEFAULT_OPTS='--cycle --layout=reverse-list'
 if [[ $TERM = xterm-color ]] || [[ $TERM = *-256color ]]; then
-  export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg+:#1e2132,bg:#161821,spinner:#84a0c6,hl:#6b7089,fg:#c6c8d1,header:#6b7089,info:#b4be82,pointer:#84a0c6,marker:#84a0c6,fg+:#c6c8d1,prompt:#84a0c6,hl+:#84a0c6"
+
+  export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=fg:#c6c8d1,bg:#161821,hl:#6b7089,fg+:#d2d4de,bg+:#1e2131,hl+:#84a0c6,prompt:#84a0c6,pointer:#91acd1"
 fi
 export FZF_TMUX_OPTS='-p 80%'
 __bashrc__source "$XDG_CONFIG_HOME/fzf/fzf.bash" \
