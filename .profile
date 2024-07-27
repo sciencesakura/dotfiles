@@ -50,7 +50,6 @@ if [ "$__profile__os" = Darwin ]; then
   if [ "$__profile__arch" = arm64 ] && [ -x /opt/homebrew/bin/brew ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
-  export HOMEBREW_AUTOREMOVE=1
   export HOMEBREW_NO_ANALYTICS=1
   export HOMEBREW_NO_AUTO_UPDATE=1
   export HOMEBREW_NO_INSTALL_CLEANUP=1
@@ -78,6 +77,9 @@ __profile__unshiftpath "$CARGO_HOME/bin"
 #
 export GHCUP_USE_XDG_DIRS=1
 
+#
+# Others
+#
 __profile__source "$HOME/.profile.local"
 __profile__unshiftpath "$HOME/.local/bin"
 

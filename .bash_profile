@@ -18,7 +18,6 @@ __bash_profile__source "$HOME/.bashrc"
 #
 # others
 #
-__bash_profile__source "$HOMEBREW_PREFIX/share/google-cloud-sdk/path.bash.inc"
 __bash_profile__source "$HOME/.bash_profile.local"
 
 unset -f __bash_profile__source
