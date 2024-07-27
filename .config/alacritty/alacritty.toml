@@ -33,3 +33,8 @@ blue = "#91acd1"
 magenta = "#ada0d3"
 cyan = "#95c4ce"
 white = "#d2d4de"
+
+[keyboard]
+bindings = [
+  { key = "Slash", mods = "Control", chars = "\u001f" }
+]
