@@ -101,7 +101,7 @@ export HISTSIZE=131072
 #
 # fzf
 #
-export FZF_DEFAULT_OPTS='--cycle --layout=reverse-list'
+export FZF_DEFAULT_OPTS='--cycle'
 if [[ $TERM = xterm-color ]] || [[ $TERM = *-256color ]]; then
 
   export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=fg:#c6c8d1,bg:#161821,hl:#6b7089,fg+:#d2d4de,bg+:#1e2131,hl+:#84a0c6,prompt:#84a0c6,pointer:#91acd1"
