@@ -46,12 +46,6 @@ repo='Shougo/context_filetype.vim'
 repo='github/copilot.vim'
 
 [[plugins]]
-repo = 'sciencesakura/cql-vim'
-lazy = true
-on_ft = ['cql']
-rev = 'feature'
-
-[[plugins]]
 repo = 'chrisbra/csv.vim'
 lazy = true
 on_ft = ['csv', 'tsv']
