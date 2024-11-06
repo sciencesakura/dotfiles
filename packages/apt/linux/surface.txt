@@ -1,50 +1,48 @@
-7zip
 automake
-bat
-bison
 build-essential
-clangd
 cmake
 csvkit
-csvtool
 curl
 dateutils
 docker-buildx-plugin
 docker-ce
 docker-compose-plugin
-flex
 fonts-noto
 fzf
-gettext
+gettext             # vim
 gh
 git
-gnupg
-gtkwave
+gnome-shell-extension-manager
+htop
 ibus-mozc
 icdiff
-iverilog
 jq
-libfl-dev
-libfuse2
-libncurses-dev
-libperl-dev
-libpython3-dev
-libreoffice
-libtool-bin
-libxml2-utils
-libxt-dev
+kdeconnect
+libacl1-dev         # vim
+libfontconfig-dev   # Alacritty
+libfreetype-dev     # Alacritty
+libfuse2t64         # JetBrains Toolbox
+libgpm-dev          # vim
+liblua5.4-dev       # vim
+libperl-dev         # vim
+libxcb-xfixes0-dev  # Alacritty
+libxkbcommon-dev    # Alacritty
+lua5.4              # vim
 manpages-dev
+mesa-utils          # JetBrains Toolbox
 mozc-utils-gui
+net-tools
 nkf
-num-utils
 onedrive
-python3-venv
+pkg-config          # Alacritty
+python3-dev
 ripgrep
 rs
 ruby-dev
+rustup
 tig
-tmpreaper
 tmux
 tmux-plugin-manager
 tree
 xclip
+xorg-dev            # vim
