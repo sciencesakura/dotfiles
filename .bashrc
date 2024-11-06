@@ -34,8 +34,6 @@ fi
 
 alias ..='cd ..'
 alias :q=exit
-alias df='df -h'
-alias du='du -h'
 alias gs='git status'
 alias ip='ip --color=auto'
 alias jobs='jobs -l'
@@ -94,7 +92,7 @@ export PROMPT_DIRTRIM=2
 # history
 #
 export HISTCONTROL=ignoreboth
-export HISTIGNORE=date:gs:jobs:kc:kn:ll:ls:pwd:tig:top:tree
+export HISTIGNORE=gs:htop:jobs:kc:kn:ll:ls:tig:top
 export HISTTIMEFORMAT='%F %T '
 export HISTSIZE=131072
 
