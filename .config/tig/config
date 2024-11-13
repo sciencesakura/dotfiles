@@ -1,7 +1,17 @@
-set tab-size = 2
+set diff-highlight = true
+set diff-options = -m
 set history-size = 0
+set ignore-case = smart-case
+set line-graphics = utf-8
+set main-view = id date:local=true author:display=email-user commit-title:graph=v2,refs=true
 set mouse = true
+set mouse-scroll = 1
 set mouse-wheel-cursor = true
+set tab-size = 2
 
+bind generic g move-first-line
+bind generic G move-last-line
 bind generic <Ctrl-b> move-page-up
 bind generic <Ctrl-f> move-page-down
+
+color diff-header black white
