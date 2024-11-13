@@ -8,7 +8,7 @@ startup_mode = "Maximized"
 
 [font]
 normal = { family = "UDEV Gothic NFLG", style = "Regular" }
-size = 14.5
+size = 15
 
 [colors.primary]
 foreground = "#c6c8d1"
