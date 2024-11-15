@@ -13,5 +13,6 @@ bind generic g move-first-line
 bind generic G move-last-line
 bind generic <Ctrl-b> move-page-up
 bind generic <Ctrl-f> move-page-down
+bind main y @sh -c 'echo %(commit) | (type pbcopy >/dev/null 2>&1 && pbcopy || xclip -r -selection clipboard)'
 
 color diff-header black white
