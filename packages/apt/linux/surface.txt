@@ -13,6 +13,7 @@ gettext             # vim
 gh
 git
 gnome-shell-extension-manager
+golang-go
 htop
 ibus-mozc
 icdiff
@@ -43,6 +44,8 @@ rustup
 tig
 tmux
 tmux-plugin-manager
+traceroute
 tree
+yq
 xclip
 xorg-dev            # vim
