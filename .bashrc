@@ -66,8 +66,10 @@ __bashrc__source "$HOME/.bash_aliases"
 # functions
 #
 fbr() {
-  local branch="$(\git branch -vv | \fzf-tmux -p 80% -- +m)" && \
-    \git switch "$(\echo "$branch" | \sed -E 's/^\*? *//' | \awk '{print $1}')"
+  local branches branch
+  branches="$(\git --no-pager branch -vv)" \
+    && branch="$(\echo "$branches" | \fzf-tmux -p 80% -- +m)" \
+    && \git switch "$(\echo "$branch" | \sed -E "s/^\s*\*\s*//" | \awk '{print $1}')"
 }
 
 mkcd() {
