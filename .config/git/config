@@ -10,5 +10,8 @@
 	prompt = false
 [icdiff]
 	options = -N --tabsize=2
+[pager]
+  branch = false
+  log = false
 [push]
 	default = simple
