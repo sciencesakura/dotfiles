@@ -4,7 +4,7 @@ depends = ['asyncomplete.vim']
 hook_add = '''
   autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
     \ 'name': 'buffer',
-    \ 'allowlist': ['cql', 'html', 'json', 'markdown', 'sql', 'text', 'toml', 'xml', 'yaml'],
+    \ 'allowlist': ['html', 'json', 'markdown', 'sql', 'text', 'toml', 'xml', 'yaml'],
     \ 'priority': 90,
     \ 'completor': function('asyncomplete#sources#buffer#completor')
     \ }))

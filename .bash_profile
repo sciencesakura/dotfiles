@@ -1,6 +1,3 @@
-__os="$(uname -s)"
-__arch="$(uname -m)"
-
 __bash_profile__source() {
   [[ -r $1 ]] && . "$1"
 }
@@ -21,4 +18,3 @@ __bash_profile__source "$HOME/.bashrc"
 __bash_profile__source "$HOME/.bash_profile.local"
 
 unset -f __bash_profile__source
-unset -v __arch __os

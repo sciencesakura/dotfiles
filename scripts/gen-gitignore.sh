@@ -8,18 +8,15 @@ GITHUB_GITIGNORE_DIR="${1%/}"
   exit 1
 }
 
-OUTPUT_IGNORE_FILE="$CURRENT_DIR/../.config/git/ignore"
-[ -f "$OUTPUT_IGNORE_FILE" ] && {
-  echo "Error: ignore file already exists."
-  exit 1
-}
+OUTPUT_IGNORE_FILE="$HOME/.config/git/ignore"
+printf "# $(date +%c)\n" > "$OUTPUT_IGNORE_FILE"
 
 while read -r entry; do
   entry="${entry%%#*}"
   [ -z "$entry" ] && continue
   path="$GITHUB_GITIGNORE_DIR/$entry"
   [ -f "$path" ] || {
-    echo "Error: $entry file does not exist. skipping."
+    echo "Error: $entry file does not exist. skipping." >&2
     continue
   }
   printf "# $entry\n" >> "$OUTPUT_IGNORE_FILE"
