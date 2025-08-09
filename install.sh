@@ -1,6 +1,8 @@
 #!/bin/sh
 
-REPO_ROOT="${1:?}"
+type realpath >/dev/null 2>&1 && \
+  REPO_ROOT="$(realpath "$(dirname "$0")")" || \
+  REPO_ROOT="$(cd "$(dirname "$0")" && pwd)"
 BACKUP_DIR="$HOME/backup/dotfiles/$(date +%Y%m%d%H%M%S)"
 ENTRIES=".bash_profile \
   .bashrc \
