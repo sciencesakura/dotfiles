@@ -11,9 +11,9 @@ ENTRIES=".bash_profile \
   .config/tig \
   .config/tmux/tmux.conf \
   .config/tmux-powerline \
+  .config/vim \
   .inputrc \
-  .profile \
-  .vim"
+  .profile"
 
 for i in $ENTRIES; do
   printf "Installing %s\n" "$i"
