@@ -21,8 +21,8 @@ if [[ "$(uname -s)" = Darwin ]]; then
   alias cp='/bin/cp -civ'
 else
   alias cp='cp -iv'
-  alias pbcopy='xclip -r -selection clipboard'
-  alias pbpaste='xclip -o -r -selection clipboard'
+  alias pbcopy=wl-copy
+  alias pbpaste=wl-paste
 fi
 
 alias ..='cd ..'
