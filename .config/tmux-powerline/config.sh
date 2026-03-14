@@ -6,6 +6,10 @@
 # General {
 	# Show which segment fails and its exit code.
 	export TMUX_POWERLINE_DEBUG_MODE_ENABLED="false"
+	# Create error log in tmux runtime temp dir.
+	export TMUX_POWERLINE_ERROR_LOGS_ENABLED="false"
+	# Only log specific scopes. Space separated list of scopes. Supported scopes: weather.sh lib/text_roll.sh lib/powerline.sh lib/colors.sh config/helpers.sh
+	export TMUX_POWERLINE_ERROR_LOGS_SCOPES=""
 	# Use patched font symbols.
 	export TMUX_POWERLINE_PATCHED_FONT_IN_USE="true"
 
@@ -16,22 +20,22 @@
 	# Overlay directory to look for segments. There you can put your own segments outside the repo. Fallback will still be the "segments" directory in the repo.
 	export TMUX_POWERLINE_DIR_USER_SEGMENTS="${XDG_CONFIG_HOME:-$HOME/.config}/tmux-powerline/segments"
 
-	# The initial visibility of the status bar. Can be {"on", "off", "2"}. 2 will create two status lines: one for the window list and one with status bar segments. 
+	# The initial visibility of the status bar. Can be {"on", "off", "2"}. 2 will create two status lines: one for the window list and one with status bar segments.
 	export TMUX_POWERLINE_STATUS_VISIBILITY="on"
 	# In case of visibility = 2, where to display window status and where left/right status bars.
 	# 0: window status top, left/right status bottom; 1: window status bottom, left/right status top
 	export TMUX_POWERLINE_WINDOW_STATUS_LINE=0
 	# The status bar refresh interval in seconds.
 	# Note that events that force-refresh the status bar (such as window renaming) will ignore this.
-	export TMUX_POWERLINE_STATUS_INTERVAL="3"
+	export TMUX_POWERLINE_STATUS_INTERVAL="5"
 	# The location of the window list. Can be {"absolute-centre, centre, left, right"}.
 	# Note that "absolute-centre" is only supported on `tmux -V` >= 3.2.
 	export TMUX_POWERLINE_STATUS_JUSTIFICATION="centre"
 
 	# The maximum length of the left status bar.
-	export TMUX_POWERLINE_STATUS_LEFT_LENGTH="100"
+	export TMUX_POWERLINE_STATUS_LEFT_LENGTH="60"
 	# The maximum length of the right status bar.
-	export TMUX_POWERLINE_STATUS_RIGHT_LENGTH="100"
+	export TMUX_POWERLINE_STATUS_RIGHT_LENGTH="90"
 
 	# The separator to use between windows on the status bar.
 	export TMUX_POWERLINE_WINDOW_STATUS_SEPARATOR=""
@@ -58,10 +62,20 @@
 # }
 
 # battery.sh {
-	# How to display battery remaining. Can be {percentage, cute}.
+	# How to display battery remaining. Can be {percentage, cute, hearts}.
 	export TMUX_POWERLINE_SEG_BATTERY_TYPE="percentage"
 	# How may hearts to show if cute indicators are used.
 	export TMUX_POWERLINE_SEG_BATTERY_NUM_HEARTS="5"
+# }
+
+# cpu_temp.sh {
+	# CPU temperature icon
+	export TMUX_POWERLINE_SEG_CPU_TEMP_ICON=" "
+	# Linux only. Regexp to indicate a line containing CPU temperature in 'sensors' output.
+	# Check the output of 'sensors' program, decide which line contains desired CPU temperature
+	# and store an unique part of that line in this variable. It will be used by 'grep' program
+	# to distinct the 'CPU temperature' line from the rest output lines.
+	export TMUX_POWERLINE_SEG_CPU_TEMP_SENSORS_LINE_MARKER="Package id 0\|Physical id 0\|temp1"
 # }
 
 # date.sh {
@@ -78,6 +92,19 @@
 # disk_usage.sh {
 	# Filesystem to retrieve disk space information. Any from the filesystems available (run "df | awk '{print }'" to check them).
 	export TMUX_POWERLINE_SEG_DISK_USAGE_FILESYSTEM="/"
+# }
+
+# dropbox_status.sh {
+	# The Dropbox glyph to use
+	export TMUX_POWERLINE_SEG_DROPBOX_GLYPH=""
+	# Replace 'Uploading' in the status
+	export TMUX_POWERLINE_SEG_DROPBOX_UPLOAD_GLYPH=""
+	# Replace 'Downloading' in the status
+	export TMUX_POWERLINE_SEG_DROPBOX_DOWNLOAD_GLYPH=""
+	# Replace 'Indexing' in the status
+	export TMUX_POWERLINE_SEG_DROPBOX_INDEX_GLYPH=""
+	# Replace 'Syncing' in the status
+	export TMUX_POWERLINE_SEG_DROPBOX_SYNC_GLYPH=""
 # }
 
 # earthquake.sh {
@@ -131,8 +158,10 @@
 # }
 
 # hostname.sh {
-	# Use short or long format for the hostname. Can be {"short, long"}.
+	# Use short, long or custom format for the hostname. Can be {"short", "long", "custom"}.
 	export TMUX_POWERLINE_SEG_HOSTNAME_FORMAT="short"
+	# Custom name to be used when format is "custom"
+	export TMUX_POWERLINE_SEG_HOSTNAME_CUSTOM=""
 # }
 
 # ifstat.sh {
@@ -163,9 +192,9 @@
 	# Kubernetes config context symbol.
 	# export TMUX_POWERLINE_SEG_KUBERNETES_CONTEXT_SYMBOL="󱃾"
 	# Kubernetes config context symbol colour.
-	export TMUX_POWERLINE_SEG_KUBERNETES_CONTEXT_SYMBOL_COLOUR="#84a0c6"
+	# export TMUX_POWERLINE_SEG_KUBERNETES_CONTEXT_SYMBOL_COLOUR="255"
 	# Separator for display mode "name_namespace"
-	TMUX_POWERLINE_SEG_KUBERNETES_CONTEXT_SEPARATOR="  "
+	# TMUX_POWERLINE_SEG_KUBERNETES_CONTEXT_SEPARATOR="󰿟"
 # }
 
 # lan_ip.sh {
@@ -187,7 +216,7 @@
 	# Enter your Gmail username here WITH OUT @gmail.com.( OR @domain)
 	export TMUX_POWERLINE_SEG_MAILCOUNT_GMAIL_USERNAME=""
 	# Google password. Recomenned to use application specific password (https://accounts.google.com/b/0/IssuedAuthSubTokens) Leave this empty to get password from OS X keychain.
-	# For OSX users : MAKE SURE that you add a key to the keychain in the format as follows
+	# For macOS users : MAKE SURE that you add a key to the keychain in the format as follows
 	# Keychain Item name : http://<value-you-fill-in-server-variable-below>
 	# Account name : <username-below>@<server-below>
 	# Password : Your password ( Once again, try to use 2 step-verification and application-specific password)
@@ -209,6 +238,14 @@
 	## mailcheck
 	# Optional path to mailcheckrc
 	export TMUX_POWERLINE_SEG_MAILCOUNT_MAILCHECKRC="/home/sciencesakura/.mailcheckrc"
+# }
+
+# mem_used.sh {
+	# Memory icon
+	export TMUX_POWERLINE_SEG_MEM_USED_ICON=" "
+	# Measure unit of memory: "GB" or "MB".
+	# In context of this segment "1 GB" equals "2 ^ 30 bytes" and "1 MB" eqauls "2 ^ 20 bytes".
+	export TMUX_POWERLINE_SEG_MEM_USED_UNIT="GB"
 # }
 
 # mode_indicator.sh {
@@ -238,7 +275,7 @@
 # }
 
 # now_playing.sh {
-	# Music player to use. Can be any of {audacious, banshee, cmus, apple_music, itunes, lastfm, plexamp, mocp, mpd, mpd_simple, pithos, playerctl, rdio, rhythmbox, spotify, spotify_wine, file}.
+	# Music player to use. Can be any of {audacious, banshee, cmus, apple_music, itunes, lastfm, plexamp, mocp, mpd, mpd_simple, pithos, playerctl, rdio, rhythmbox, spotify, file}.
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_MUSIC_PLAYER="spotify"
 	# File to be read in case the song is being read from a file
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_FILE_NAME=""
@@ -283,8 +320,10 @@
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_LASTFM_UPDATE_PERIOD="30"
 	# Fancy char to display before now playing track
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_NOTE_CHAR="♫"
+	# Text to display when nothing is playing. If empty, segment will not be displayed.
+	export TMUX_POWERLINE_SEG_NOW_PLAYING_NOT_PLAYING=""
 	
-	# Plexamp 
+	# Plexamp
 	# Set up steps for Plexamp
 	# 1. Make sure jq(1) is installed on the system.
 	# 2. Make sure you have an instance of Tautulli that is accessible by the computer running tmux-powerline.
@@ -311,10 +350,22 @@
 	# export TMUX_POWERLINE_SEG_TIME_TZ=""
 # }
 
+# tmux_continuum_save.sh {
+	# Path to the tmux-continuum git repo.
+	export TMUX_POWERLINE_SEG_TMUX_CONTINUUM_PATH="/home/sciencesakura/.config/tmux/plugins/tmux-continuum"
+# }
+
+# tmux_continuum_status.sh {
+	# Path to the tmux-continuum git repo.
+	export TMUX_POWERLINE_SEG_TMUX_CONTINUUM_PATH="/home/sciencesakura/.config/tmux/plugins/tmux-continuum"
+	# Message to perfix the status indication with.
+	export TMUX_POWERLINE_SEG_TMUX_CONTINUUM_PREFIX="Continuum status: "
+# }
+
 # tmux_mem_cpu_load.sh {
 	# Arguments passed to tmux-mem-cpu-load.
 	# See https://github.com/thewtex/tmux-mem-cpu-load for all available options.
-	# export TMUX_POWERLINE_SEG_TMUX_MEM_CPU_LOAD_ARGS="-v"
+	export TMUX_POWERLINE_SEG_TMUX_MEM_CPU_LOAD_ARGS=" "
 # }
 
 # tmux_session_info.sh {
@@ -407,20 +458,19 @@
 # }
 
 # weather.sh {
-	# The data provider to use. Currently only "yahoo" is supported.
+	# The data provider to use. Currently only "yrno" is supported.
 	export TMUX_POWERLINE_SEG_WEATHER_DATA_PROVIDER="yrno"
 	# What unit to use. Can be any of {c,f,k}.
 	export TMUX_POWERLINE_SEG_WEATHER_UNIT="c"
 	# How often to update the weather in seconds.
 	export TMUX_POWERLINE_SEG_WEATHER_UPDATE_PERIOD="600"
-	# Name of GNU grep binary if in PATH, or path to it.
-	export TMUX_POWERLINE_SEG_WEATHER_GREP="grep"
-	# Location of the JSON parser, jq
-	export TMUX_POWERLINE_SEG_WEATHER_JSON="jq"
+	# How often to update the weather location in seconds (this is only used when latitude and longitude settings are set to "auto")
+	export TMUX_POWERLINE_SEG_WEATHER_LOCATION_UPDATE_PERIOD="86400"
 	# Your location
 	# Latitude and Longtitude for use with yr.no
-	TMUX_POWERLINE_SEG_WEATHER_LAT=""
-	TMUX_POWERLINE_SEG_WEATHER_LON=""
+	# Set both to "auto" to detect automatically based on your IP address, or set them manually
+	export TMUX_POWERLINE_SEG_WEATHER_LAT="auto"
+	export TMUX_POWERLINE_SEG_WEATHER_LON="auto"
 # }
 
 # xkb_layout.sh {
