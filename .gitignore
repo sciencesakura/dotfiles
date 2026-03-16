@@ -1,1 +1,5 @@
 *.local.*
+*.local
+
+.config/git/ignore
+.config/tmux/plugins/
