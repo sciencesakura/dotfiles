@@ -8,10 +8,12 @@
 	tool = vimdiff
 [difftool]
 	prompt = false
+[ghq]
+	root = ~/repos
 [icdiff]
 	options = -N --tabsize=2
 [pager]
-  branch = false
-  log = false
+	branch = false
+	log = false
 [push]
 	default = simple

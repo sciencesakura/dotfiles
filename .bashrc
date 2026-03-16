@@ -57,37 +57,6 @@ fi
 __bashrc__source "$HOME/.bash_aliases"
 
 #
-# functions
-#
-fbr() {
-  local branches branch
-  branches="$(\git --no-pager branch -vv)" \
-    && branch="$(\echo "$branches" | \fzf-tmux -p 80% -- +m)" \
-    && \git switch "$(\echo "$branch" | \sed -E "s/^\s*\*\s*//" | \awk '{print $1}')"
-}
-
-mkcd() {
-  \mkdir -p "$@" && \cd "$1"
-}
-
-#
-# completiion
-#
-if [[ -z $BASH_COMPLETION_VERSINFO ]]; then
-  [[ -n $HOMEBREW_PREFIX ]] && __bashrc__source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" || \
-    __bashrc__source /usr/share/bash-completion/bash_completion || \
-    __bashrc__source /etc/bash_completion
-fi
-
-#
-# prompt
-#
-export PROMPT_DIRTRIM=2
-type __git_ps1 &>/dev/null && \
-  export PS1='\[\e[33m\]\u\[\e[m\]@\[\e[32m\]\h\[\e[m\] \[\e[1;34m\]\w\[\e[1;31m\]$(__git_ps1)\[\e[m\]$ ' || \
-  export PS1='\[\e[33m\]\u\[\e[m\]@\[\e[32m\]\h\[\e[m\] \[\e[1;34m\]\w\[\e[m\]$ '
-
-#
 # history
 #
 export HISTCONTROL=ignoreboth
@@ -100,7 +69,55 @@ export HISTSIZE=131072
 #
 export FZF_DEFAULT_OPTS='--cycle --color=fg:#c6c8d1,bg:#161821,hl:#6b7089,fg+:#d2d4de,bg+:#1e2131,hl+:#84a0c6,prompt:#84a0c6,pointer:#91acd1'
 export FZF_TMUX_OPTS='-p 80%'
-__bashrc__source "$XDG_CONFIG_HOME/fzf/fzf.bash" || __bashrc__source /usr/share/doc/fzf/examples/key-bindings.bash
+__bashrc__source "$XDG_CONFIG_HOME/fzf/fzf.bash" \
+    || __bashrc__source /usr/share/doc/fzf/examples/key-bindings.bash
+
+#
+# functions
+#
+fzf-ghq() {
+  local repo
+  if [[ -n $TMUX ]]; then
+    repo="$(\ghq list | \fzf-tmux ${FZF_TMUX_OPTS} -- +m)"
+  else
+    repo="$(\ghq list | \fzf +m)"
+  fi
+  [[ $? -eq 0 ]] && \cd "$(\ghq root)/$repo"
+}
+
+fbr() {
+  local branches branch
+  branches="$(\git --no-pager branch -vv)" \
+    && branch="$(\echo "$branches" | \fzf-tmux -p 80% -- +m)" \
+    && \git switch "$(\echo "$branch" | \sed -E "s/^\s*\*\s*//" | \awk '{print $1}')"
+}
+
+mkcd() {
+  \mkdir -p "$@" && \cd "$1"
+}
+
+#
+# completion
+#
+if [[ -z $BASH_COMPLETION_VERSINFO ]]; then
+  [[ -n $HOMEBREW_PREFIX ]] \
+      && __bashrc__source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" \
+      || __bashrc__source /usr/share/bash-completion/bash_completion \
+      || __bashrc__source /etc/bash_completion
+fi
+
+#
+# prompt
+#
+export PROMPT_DIRTRIM=2
+type __git_ps1 &>/dev/null \
+    && export PS1='\[\e[33m\]\u\[\e[m\]@\[\e[32m\]\h\[\e[m\] \[\e[1;34m\]\w\[\e[1;31m\]$(__git_ps1)\[\e[m\]$ ' \
+    || export PS1='\[\e[33m\]\u\[\e[m\]@\[\e[32m\]\h\[\e[m\] \[\e[1;34m\]\w\[\e[m\]$ '
+
+#
+# key bindings
+#
+bind -m emacs-standard '"\ea": " \C-u\C-kfzf-ghq\C-e\C-m\er"'
 
 #
 # others
