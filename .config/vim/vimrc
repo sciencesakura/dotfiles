@@ -4,21 +4,21 @@ set encoding=utf-8
 set expandtab
 set ignorecase
 set laststatus=2
+set list
 set number
-set shiftwidth=2
+set ruler
+set shiftwidth=0 "use tabstop value
 set smartcase
+set smartindent
 set splitbelow
 set tabstop=2
-if has('clipboard')
-  if has('unnamedplus')
-    set clipboard^=unnamedplus
-  else
-    set clipboard^=unnamed
-  endif
+if v:version >= 900
+  set listchars=eol:↲,tab:>\\x20
 endif
-if has('cmdline_info')
-  set ruler
+if v:version >= 902
+  set autocomplete
 endif
+
 if has('extra_search')
   set hlsearch
   set incsearch
@@ -26,15 +26,34 @@ endif
 if has('mouse')
   set mouse=a
 endif
-if has('smartindent')
-  set smartindent
-endif
 if has('syntax')
   set cursorline
+  set spell
   set spelllang=en,cjk
+  if v:version >= 900
+    set spelloptions=camel
+  endif
+endif
+if has('termguicolors')
+  set termguicolors
+endif
+if has('unnamedplus')
+  set clipboard^=unnamedplus
+elseif has('clipboard_provider')
+  set clipboard^=unnamed
+endif
+if has('wayland_focus_steal')
+  set wlsteal
 endif
 
-set <S-F6>=[17;2~
+syntax enable
+filetype plugin indent on
+
+try
+  colorscheme iceberg
+catch /^Vim\%((\a\+)\)\=:E185/
+  "ignore error
+endtry
 
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 nnoremap <silent> [b :bprevious<CR>
@@ -42,79 +61,27 @@ nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> tt :tabnew<CR>
 nnoremap <silent> [t :tabprevious<CR>
 nnoremap <silent> ]t :tabnext<CR>
+nnoremap <silent> tm :terminal<CR>
 
 if v:version >= 800
-  set belloff=all
-  if has('termguicolors') && $COLORTERM == 'truecolor'
-    set termguicolors
-  endif
-
-  if $TERM !~ '^xterm'
-    let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
-    let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
-  endif
+  packadd! editorconfig
 endif
 
-if v:version >= 801
-  if has('terminal')
-    set termwinsize=16x0
+" vim-airline
+let g:airline_powerline_fonts = 1
 
-    nnoremap <silent> tm :terminal<CR>
-  endif
-endif
+" caw.vim
+let g:caw_no_default_keymappings = 1
+nnoremap <silent> <C-_> <plug>(caw:hatpos:toggle)
+xnoremap <silent> <C-_> <plug>(caw:hatpos:toggle)
+nnoremap <silent> <C-BSlash> <plug>(caw:wrap:toggle)
+xnoremap <silent> <C-BSlash> <plug>(caw:wrap:toggle)
 
-if v:version >= 900
-  if has('syntax')
-    set spelloptions=camel
-  endif
-endif
+" NERDTree
+let g:NERDTreeWinSize = min([&columns / 4, 48])
+nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 
-"fzf
-if isdirectory('/usr/share/doc/fzf/examples')
-  set runtimepath^=/usr/share/doc/fzf/examples
-elseif isdirectory(expand('$HOMEBREW_PREFIX/opt/fzf'))
-  execute 'set runtimepath^=' . expand('$HOMEBREW_PREFIX/opt/fzf')
-endif
-
-"dein Scripts-----------------------------
-let s:DEIN_HOME = expand('$HOME/.cache/dein')
-let s:DEIN_REPODIR = s:DEIN_HOME . '/repos/github.com/Shougo/dein.vim'
-
-if isdirectory(s:DEIN_REPODIR)
-  execute 'set runtimepath^=' . s:DEIN_REPODIR
-
-  if dein#load_state(s:DEIN_HOME)
-    call dein#begin(s:DEIN_HOME)
-    call dein#load_toml(expand('$HOME/.vim/dein.toml'))
-    if filereadable(expand('$HOME/.vim/dein.local.toml'))
-      call dein#load_toml(expand('$HOME/.vim/dein.local.toml'))
-    endif
-    call dein#end()
-    call dein#save_state()
-  endif
-
-  " If you want to install not installed plugins on startup.
-  if dein#check_install()
-    call dein#install()
-  endif
-endif
-"End dein Scripts-------------------------
-
-filetype plugin indent on
-syntax enable
-
-"vim-lsp
-function! s:on_lsp_buffer_enabled() abort
-  nnoremap <buffer> B <plug>(lsp-definition)
-  nnoremap <buffer> <F7> <plug>(lsp-references)
-  nnoremap <buffer> <S-F6> <plug>(lsp-rename)
-  nnoremap <buffer> <S-F2> <plug>(lsp-previous-diagnostic)
-  nnoremap <buffer> <F2> <plug>(lsp-next-diagnostic)
-  nnoremap <buffer> <F1> <plug>(lsp-hover)
-endfunction
-
-augroup lsp_install
-  autocmd!
-  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
-"END vim-lsp
+" previm
+let g:previm_custom_preview_base_dir = expand('$XDG_CACHE_HOME/previm')
+let g:previm_enable_realtime = 1
+let g:previm_show_header = 0

@@ -3,3 +3,4 @@
 
 .config/git/ignore
 .config/tmux/plugins/
+.config/vim/pack/
