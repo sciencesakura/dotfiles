@@ -85,11 +85,14 @@ fzf-ghq() {
   [[ $? -eq 0 ]] && \cd "$(\ghq root)/$repo"
 }
 
-fbr() {
-  local branches branch
-  branches="$(\git --no-pager branch -vv)" \
-    && branch="$(\echo "$branches" | \fzf-tmux -p 80% -- +m)" \
-    && \git switch "$(\echo "$branch" | \sed -E "s/^\s*\*\s*//" | \awk '{print $1}')"
+fzf-git-switch() {
+  local branch
+  if [[ $TMUX ]]; then
+    branch="$(\git --no-pager branch -vv | \fzf-tmux ${FZF_TMUX_OPTS} -- +m)"
+  else
+    branch="$(\git --no-pager branch -vv | \fzf +m)"
+  fi
+  [[ $? -eq 0 ]] && \git switch "$(\echo "$branch" | \sed -E 's/^\*\s*//' | \awk '{print $1}')"
 }
 
 mkcd() {
@@ -118,6 +121,7 @@ type __git_ps1 &>/dev/null \
 # key bindings
 #
 bind -m emacs-standard '"\ea": " \C-u\C-kfzf-ghq\C-e\C-m\er"'
+bind -m emacs-standard '"\eg": " \C-u\C-kfzf-git-switch\C-e\C-m\er"'
 
 #
 # others
