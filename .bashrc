@@ -22,7 +22,7 @@ if [[ "$(uname -s)" = Darwin ]]; then
 else
   alias cp='cp -iv'
   alias pbcopy=wl-copy
-  alias pbpaste=wl-paste
+  alias pbpaste='wl-paste -n'
 fi
 
 alias ..='cd ..'
