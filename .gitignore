@@ -1,6 +1,7 @@
 *.local.*
 *.local
 
+.config/alacritty/themes
 .config/git/ignore
 .config/tmux/plugins/
 .config/vim/pack/
