@@ -102,17 +102,15 @@ fi
 # shellcheck disable=SC1143,SC2128
 if [ -z "$TMUX_POWERLINE_LEFT_STATUS_SEGMENTS" ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-		"hostname #a093c7 #161821"
 		"lan_ip #84a0c6 #161821 ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}"
-		"wan_ip #84a0c6 #161821"
-		"tmux_session_info #2e313f #6b7089"
+		"tmux_session_info #84a0c6 #161821"
 	)
 fi
 
 # shellcheck disable=SC1143,SC2128
 if [ -z "$TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS" ]; then
 	TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
-        "uptime #e2a478 #161821"
-        "tmux_mem_cpu_load #e27878 #161821"
+		"uptime #89b8c2 #1e2132"
+		"tmux_mem_cpu_load #89b8c2 #1e2132 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
 	)
 fi
