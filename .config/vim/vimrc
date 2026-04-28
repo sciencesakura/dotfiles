@@ -42,9 +42,6 @@ if has('unnamedplus')
 elseif has('clipboard_provider')
   set clipboard^=unnamed
 endif
-if has('wayland_focus_steal')
-  set wlsteal
-endif
 
 syntax enable
 filetype plugin indent on
