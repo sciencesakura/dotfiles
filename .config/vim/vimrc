@@ -28,7 +28,6 @@ if has('mouse')
 endif
 if has('syntax')
   set cursorline
-  set spell
   set spelllang=en,cjk
   if v:version >= 900
     set spelloptions=camel
