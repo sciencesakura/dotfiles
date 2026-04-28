@@ -129,6 +129,16 @@
 	export TMUX_POWERLINE_SEG_GCALCLI_24HR_TIME_FORMAT="1"
 # }
 
+# gcloud.sh {
+	# Which Google Cloud properties to display. Can be {"project", "account_and_project", "active_config_name"}.
+	# export TMUX_POWERLINE_SEG_GCLOUD_DISPLAY_MODE="project"
+	# The symbol for Google Cloud.
+	# export TMUX_POWERLINE_SEG_GCLOUD_SYMBOL="󱇶 "
+	# The separator to use between Google Cloud account and project. This environment variable is used only when
+	# TMUX_POWERLINE_SEG_GCLOUD_DISPLAY_MODE is set to 'account_and_project'.
+	# export TMUX_POWERLINE_SEG_GCLOUD_ACCOUNT_PROJECT_SEPARATOR="󰿟"
+# }
+
 # github_notifications.sh {
 	# Github token (https://github.com/settings/tokens) with at least "notifications" scope
 	export TMUX_POWERLINE_SEG_GITHUB_NOTIFICATIONS_TOKEN=""

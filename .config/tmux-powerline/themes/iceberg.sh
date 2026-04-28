@@ -103,7 +103,7 @@ fi
 if [ -z "$TMUX_POWERLINE_LEFT_STATUS_SEGMENTS" ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
 		"lan_ip #84a0c6 #161821 ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}"
-		"tmux_session_info #84a0c6 #161821"
+		"gcloud #84a0c6 #161821"
 	)
 fi
 

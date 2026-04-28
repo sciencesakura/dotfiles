@@ -4,4 +4,5 @@
 .config/alacritty/themes
 .config/git/ignore
 .config/tmux/plugins/
+.config/tmux-powerline/config.sh.default
 .config/vim/pack/
