@@ -6,9 +6,7 @@ type realpath >/dev/null 2>&1 \
 BACKUP_DIR="$HOME/backup/dotfiles/$(date +%Y%m%d%H%M%S)"
 ENTRIES=".bash_aliases \
     .bash_profile \
-    .bash_profile.local \
     .bashrc \
-    .bashrc.local \
     .config/alacritty \
     .config/git \
     .config/tig \
@@ -16,8 +14,7 @@ ENTRIES=".bash_aliases \
     .config/tmux-powerline \
     .config/vim \
     .inputrc \
-    .profile \
-    .profile.local"
+    .profile"
 
 for i in $ENTRIES; do
   [ -e "$REPO_ROOT/$i" ] || continue

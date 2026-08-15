@@ -1,7 +1,7 @@
 #!/bin/sh
 
 CURRENT_DIR="$(dirname "$0")"
-GITHUB_GITIGNORE_DIR="${1%/}"
+GITHUB_GITIGNORE_DIR="$HOME/repos/github.com/github/gitignore"
 
 [ -d "$GITHUB_GITIGNORE_DIR" ] || {
   echo "Error: $GITHUB_GITIGNORE_DIR is not a directory."
