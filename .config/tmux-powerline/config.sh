@@ -27,7 +27,7 @@
 	export TMUX_POWERLINE_WINDOW_STATUS_LINE=0
 	# The status bar refresh interval in seconds.
 	# Note that events that force-refresh the status bar (such as window renaming) will ignore this.
-	export TMUX_POWERLINE_STATUS_INTERVAL="5"
+	export TMUX_POWERLINE_STATUS_INTERVAL="3"
 	# The location of the window list. Can be {"absolute-centre, centre, left, right"}.
 	# Note that "absolute-centre" is only supported on `tmux -V` >= 3.2.
 	export TMUX_POWERLINE_STATUS_JUSTIFICATION="centre"
@@ -66,6 +66,54 @@
 	export TMUX_POWERLINE_SEG_BATTERY_TYPE="percentage"
 	# How may hearts to show if cute indicators are used.
 	export TMUX_POWERLINE_SEG_BATTERY_NUM_HEARTS="5"
+# }
+
+# claude_code.sh {
+	# Path to Claude Code's OAuth credentials file (access token is read from here).
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_CREDENTIALS_FILE="/home/sciencesakura/.claude/.credentials.json"
+	# How often (seconds) to refresh the session/weekly limits.
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_UPDATE_INTERVAL="300"
+	# Show the 5-hour "session" utilization bar.
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_SHOW_SESSION="yes"
+	# Show the 7-day "weekly" utilization bar.
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_SHOW_WEEKLY="yes"
+	# Time-remaining indicators: session window (h:mm), weekly window (d/h), payment cycle (d/h).
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_SHOW_SESSION_TIME="no"
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_SHOW_WEEKLY_TIME="no"
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_SHOW_CYCLE_TIME="no"
+	# Leading symbol, separator between windows, and the tighter joiner that binds a
+	# window's percentage to its own time-left (e.g. "10% 3:48").
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_SYMBOL="󰚩"
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_SEPARATOR=" | "
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_TIME_JOINER=" "
+	# Prefixes for the time indicators (cycle gets a marker since it stands alone).
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_SESSION_TIME_SYMBOL=""
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_WEEKLY_TIME_SYMBOL=""
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_CYCLE_TIME_SYMBOL="↻"
+	# Show accumulated cost via ccusage (https://github.com/ryoppippi/ccusage).
+	# This requires ccusage to be installed; it is a notional API-equivalent cost.
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_SHOW_COST="no"
+	# Which cost(s) to show: alltime | period | both. Note "alltime" is bounded by
+	# the transcripts still on disk: Claude Code prunes them after cleanupPeriodDays
+	# (default 30), so it means "since the oldest retained transcript".
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_COST_MODE="alltime"
+	# Day-of-month the payment period starts: a number 1-28, or "auto" to derive the
+	# Max renewal day from the subscription billing anchor via the API. "auto" sees
+	# only the original signup date, not later plan changes — set the day explicitly
+	# if you upgraded/downgraded mid-cycle.
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_COST_PERIOD_START_DAY="auto"
+	# Day used when COST_PERIOD_START_DAY="auto" but the API is unreachable.
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_COST_PERIOD_START_FALLBACK_DAY="1"
+	# How often (seconds) to recompute the cost (ccusage is heavier than the API call).
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_COST_UPDATE_INTERVAL="3600"
+	# The ccusage command (pin it for reproducibility if you like). The "claude
+	# daily" subcommand is appended automatically, so give only the base command
+	# (without "claude"/"daily" yourself) -- only Claude Code sessions are counted.
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_CCUSAGE_CMD="ccusage"
+	# Run ccusage offline (bundled prices, no network).
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_CCUSAGE_OFFLINE="yes"
+	# printf format for each cost dollar figure.
+	# export TMUX_POWERLINE_SEG_CLAUDE_CODE_COST_FORMAT="$%.2f"
 # }
 
 # cpu_temp.sh {
@@ -129,16 +177,6 @@
 	export TMUX_POWERLINE_SEG_GCALCLI_24HR_TIME_FORMAT="1"
 # }
 
-# gcloud.sh {
-	# Which Google Cloud properties to display. Can be {"project", "account_and_project", "active_config_name"}.
-	# export TMUX_POWERLINE_SEG_GCLOUD_DISPLAY_MODE="project"
-	# The symbol for Google Cloud.
-	# export TMUX_POWERLINE_SEG_GCLOUD_SYMBOL="󱇶 "
-	# The separator to use between Google Cloud account and project. This environment variable is used only when
-	# TMUX_POWERLINE_SEG_GCLOUD_DISPLAY_MODE is set to 'account_and_project'.
-	# export TMUX_POWERLINE_SEG_GCLOUD_ACCOUNT_PROJECT_SEPARATOR="󰿟"
-# }
-
 # github_notifications.sh {
 	# Github token (https://github.com/settings/tokens) with at least "notifications" scope
 	export TMUX_POWERLINE_SEG_GITHUB_NOTIFICATIONS_TOKEN=""
@@ -165,6 +203,16 @@
 	# export TMUX_POWERLINE_SEG_GITHUB_NOTIFICATIONS_UPDATE_INTERVAL="60"
 	# Enable Test Mode (to test how the segment will look like when you have notifications for all types/reasons)
 	# export TMUX_POWERLINE_SEG_GITHUB_NOTIFICATIONS_TEST_MODE="no"
+# }
+
+# google_cloud.sh {
+	# Which Google Cloud properties to display. Can be {"account", "project", "account_project", "active_config_name"}.
+	# export TMUX_POWERLINE_SEG_GOOGLE_CLOUD_DISPLAY_MODE="project"
+	# The symbol for Google Cloud.
+	# export TMUX_POWERLINE_SEG_GOOGLE_CLOUD_SYMBOL="󱇶 "
+	# The separator to use between Google Cloud account and project. This environment variable is used only when
+	# TMUX_POWERLINE_SEG_GOOGLE_CLOUD_DISPLAY_MODE is set to 'account_project'.
+	# export TMUX_POWERLINE_SEG_GOOGLE_CLOUD_ACCOUNT_PROJECT_SEPARATOR="󰿟"
 # }
 
 # hostname.sh {
@@ -314,6 +362,10 @@
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_MPD_SIMPLE_FORMAT="%artist% - %title%"
 	# Song display format for playerctl. see "Format Strings" in playerctl(1).
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_PLAYERCTL_FORMAT="{{ artist }} - {{ title }}"
+	# playerctl --player option value. Used to select specific players or set priority order. See "Description" in playerctl(1).
+	# export TMUX_POWERLINE_SEG_NOW_PLAYING_PLAYERCTL_OPT_PLAYER=""
+	# playerctl --ignore-player option value. See "Description" in playerctl(1).
+	# export TMUX_POWERLINE_SEG_NOW_PLAYING_PLAYERCTL_OPT_IGNORE_PLAYER=""
 	# Song display format for rhythmbox. see "FORMATS" in rhythmbox-client(1).
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_RHYTHMBOX_FORMAT="%aa - %tt"
 	
@@ -362,12 +414,12 @@
 
 # tmux_continuum_save.sh {
 	# Path to the tmux-continuum git repo.
-	export TMUX_POWERLINE_SEG_TMUX_CONTINUUM_PATH="/home/sciencesakura/.config/tmux/plugins/tmux-continuum"
+	export TMUX_POWERLINE_SEG_TMUX_CONTINUUM_PATH="/home/sciencesakura/.config/tmux/plugins//tmux-continuum"
 # }
 
 # tmux_continuum_status.sh {
 	# Path to the tmux-continuum git repo.
-	export TMUX_POWERLINE_SEG_TMUX_CONTINUUM_PATH="/home/sciencesakura/.config/tmux/plugins/tmux-continuum"
+	export TMUX_POWERLINE_SEG_TMUX_CONTINUUM_PATH="/home/sciencesakura/.config/tmux/plugins//tmux-continuum"
 	# Message to perfix the status indication with.
 	export TMUX_POWERLINE_SEG_TMUX_CONTINUUM_PREFIX="Continuum status: "
 # }
@@ -375,7 +427,7 @@
 # tmux_mem_cpu_load.sh {
 	# Arguments passed to tmux-mem-cpu-load.
 	# See https://github.com/thewtex/tmux-mem-cpu-load for all available options.
-	export TMUX_POWERLINE_SEG_TMUX_MEM_CPU_LOAD_ARGS=" "
+	export TMUX_POWERLINE_SEG_TMUX_MEM_CPU_LOAD_ARGS=""
 # }
 
 # tmux_session_info.sh {
@@ -481,6 +533,17 @@
 	# Set both to "auto" to detect automatically based on your IP address, or set them manually
 	export TMUX_POWERLINE_SEG_WEATHER_LAT="auto"
 	export TMUX_POWERLINE_SEG_WEATHER_LON="auto"
+	# Icon style for weather condition symbols:
+	#   "emoji"       - emoji with VS16 variation selector (default, original behaviour)
+	#   "emoji_fixed" - emoji with VS16 stripped; fixes status-bar scrolling/duplication
+	#                   on terminals that miscount VS16 width (see issue #351)
+	#   "nerdfonts"   - Nerd Font PUA icons (1 cell, no width ambiguity); also fixes #351
+	#                   if you already use a Nerd Font in your terminal
+	#   "auto"        - nerdfonts when a patched font is detected, else emoji
+	# Note: after changing this value, delete the weather cache file to see the effect immediately:
+	#   rm "/tmp/tmux-powerline_sciencesakura/tmux-powerline/weather_cache_data.txt"
+	#   Run doctor.sh to find out the TMUX_POWERLINE_DIR_TEMPORARY path.
+	export TMUX_POWERLINE_SEG_WEATHER_ICON_STYLE="emoji"
 # }
 
 # xkb_layout.sh {
