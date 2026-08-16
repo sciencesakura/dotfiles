@@ -36,11 +36,38 @@ endif
 if has('termguicolors')
   set termguicolors
 endif
-if has('unnamedplus')
-  set clipboard^=unnamedplus
-elseif has('clipboard_provider')
+if has('clipboard_provider')
   set clipboard^=unnamed
+  if has('wayland')
+    " Since wlr-data-control-v1 and ext-data-control-v1 are not supported in my env, use wl-clipboard.
+    " https://vim-jp.org/vimdoc-ja/wayland.html
+    function! s:Available()
+      return executable('wl-copy') && executable('wl-paste')
+    endfunction
+
+    function! s:Copy(reg, type, str)
+      call system('wl-copy', a:str)
+    endfunction
+
+    function! s:Paste(reg)
+      return ['', systemlist('wl-paste')]
+    endfunction
+
+    let v:clipproviders['wl_clipboard'] = {
+          \ 'available': function('s:Available'),
+          \ 'copy': {
+          \   '+': function('s:Copy'),
+          \   '*': function('s:Copy'),
+          \ },
+          \ 'paste': {
+          \   '+': function('s:Paste'),
+          \   '*': function('s:Paste'),
+          \ },
+          \ }
+    set clipmethod=wl_clipboard
+  endif
 endif
+
 
 syntax enable
 filetype plugin indent on
