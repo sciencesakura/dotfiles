@@ -27,7 +27,7 @@
 	export TMUX_POWERLINE_WINDOW_STATUS_LINE=0
 	# The status bar refresh interval in seconds.
 	# Note that events that force-refresh the status bar (such as window renaming) will ignore this.
-	export TMUX_POWERLINE_STATUS_INTERVAL="3"
+	export TMUX_POWERLINE_STATUS_INTERVAL="1"
 	# The location of the window list. Can be {"absolute-centre, centre, left, right"}.
 	# Note that "absolute-centre" is only supported on `tmux -V` >= 3.2.
 	export TMUX_POWERLINE_STATUS_JUSTIFICATION="centre"
@@ -35,7 +35,7 @@
 	# The maximum length of the left status bar.
 	export TMUX_POWERLINE_STATUS_LEFT_LENGTH="60"
 	# The maximum length of the right status bar.
-	export TMUX_POWERLINE_STATUS_RIGHT_LENGTH="60"
+	export TMUX_POWERLINE_STATUS_RIGHT_LENGTH="90"
 
 	# The separator to use between windows on the status bar.
 	export TMUX_POWERLINE_WINDOW_STATUS_SEPARATOR=""
@@ -206,13 +206,12 @@
 # }
 
 # google_cloud.sh {
-	# Which Google Cloud properties to display. Can be {"account", "project", "account_project", "active_config_name"}.
-	# export TMUX_POWERLINE_SEG_GOOGLE_CLOUD_DISPLAY_MODE="project"
+	# Which Google Cloud properties to display. Can be {"account", "project", "active_config_name"}.
+	export TMUX_POWERLINE_SEG_GOOGLE_CLOUD_PROPERTIES_TO_DISPLAY="project"
 	# The symbol for Google Cloud.
-	# export TMUX_POWERLINE_SEG_GOOGLE_CLOUD_SYMBOL="󱇶 "
-	# The separator to use between Google Cloud account and project. This environment variable is used only when
-	# TMUX_POWERLINE_SEG_GOOGLE_CLOUD_DISPLAY_MODE is set to 'account_project'.
-	# export TMUX_POWERLINE_SEG_GOOGLE_CLOUD_ACCOUNT_PROJECT_SEPARATOR="󰿟"
+	# export TMUX_POWERLINE_SEG_GOOGLE_CLOUD_SYMBOL="󱇶"
+	# The separator to use between properties.
+	# export TMUX_POWERLINE_SEG_GOOGLE_CLOUD_SEPARATOR="󰿟"
 # }
 
 # hostname.sh {
@@ -269,7 +268,7 @@
 # mailcount.sh {
 	# Mailbox type to use. Can be any of {apple_mail, gmail, maildir, mbox, mailcheck}
 	export TMUX_POWERLINE_SEG_MAILCOUNT_MAILBOX_TYPE=""
-	
+
 	## Gmail
 	# Enter your Gmail username here WITH OUT @gmail.com.( OR @domain)
 	export TMUX_POWERLINE_SEG_MAILCOUNT_GMAIL_USERNAME=""
@@ -284,15 +283,15 @@
 	export TMUX_POWERLINE_SEG_MAILCOUNT_GMAIL_SERVER="gmail.com"
 	# How often in minutes to check for new mails.
 	export TMUX_POWERLINE_SEG_MAILCOUNT_GMAIL_INTERVAL="5"
-	
+
 	## Maildir
 	# Path to the maildir to check.
 	export TMUX_POWERLINE_SEG_MAILCOUNT_MAILDIR_INBOX="/home/sciencesakura/.mail/inbox/new"
-	
+
 	## mbox
 	# Path to the mbox to check.
 	export TMUX_POWERLINE_SEG_MAILCOUNT_MBOX_INBOX=""
-	
+
 	## mailcheck
 	# Optional path to mailcheckrc
 	export TMUX_POWERLINE_SEG_MAILCOUNT_MAILCHECKRC="/home/sciencesakura/.mailcheckrc"
@@ -353,7 +352,7 @@
 	# export TMUX_POWERLINE_SEG_NOW_PLAYING_TRACK_LOG_FILEPATH="/home/sciencesakura/.now_playing.log"
 	# Maximum number of logged song entries. Set to "unlimited" for unlimited entries.
 	# export TMUX_POWERLINE_SEG_NOW_PLAYING_TRACK_LOG_MAX_ENTRIES="100"
-	
+
 	# Hostname for MPD server in the format "[password@]host"
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_MPD_HOST="localhost"
 	# Port the MPD server is running on.
@@ -368,7 +367,7 @@
 	# export TMUX_POWERLINE_SEG_NOW_PLAYING_PLAYERCTL_OPT_IGNORE_PLAYER=""
 	# Song display format for rhythmbox. see "FORMATS" in rhythmbox-client(1).
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_RHYTHMBOX_FORMAT="%aa - %tt"
-	
+
 	# Last.fm
 	# Set up steps for Last.fm
 	# 1. Make sure jq(1) is installed on the system.
@@ -384,7 +383,7 @@
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_NOTE_CHAR="♫"
 	# Text to display when nothing is playing. If empty, segment will not be displayed.
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_NOT_PLAYING=""
-	
+
 	# Plexamp
 	# Set up steps for Plexamp
 	# 1. Make sure jq(1) is installed on the system.
@@ -414,12 +413,12 @@
 
 # tmux_continuum_save.sh {
 	# Path to the tmux-continuum git repo.
-	export TMUX_POWERLINE_SEG_TMUX_CONTINUUM_PATH="/home/sciencesakura/.config/tmux/plugins//tmux-continuum"
+	export TMUX_POWERLINE_SEG_TMUX_CONTINUUM_PATH="/home/sciencesakura/.local/share/tmux/plugins//tmux-continuum"
 # }
 
 # tmux_continuum_status.sh {
 	# Path to the tmux-continuum git repo.
-	export TMUX_POWERLINE_SEG_TMUX_CONTINUUM_PATH="/home/sciencesakura/.config/tmux/plugins//tmux-continuum"
+	export TMUX_POWERLINE_SEG_TMUX_CONTINUUM_PATH="/home/sciencesakura/.local/share/tmux/plugins//tmux-continuum"
 	# Message to perfix the status indication with.
 	export TMUX_POWERLINE_SEG_TMUX_CONTINUUM_PREFIX="Continuum status: "
 # }
