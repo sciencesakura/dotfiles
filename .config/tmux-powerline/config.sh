@@ -126,15 +126,15 @@
 	export TMUX_POWERLINE_SEG_CPU_TEMP_SENSORS_LINE_MARKER="Package id 0\|Physical id 0\|temp1"
 # }
 
-# date.sh {
-	# date(1) format for the date. If you don't, for some reason, like ISO 8601 format you might want to have "%D" or "%m/%d/%Y".
-	export TMUX_POWERLINE_SEG_DATE_FORMAT="%F"
-# }
-
 # date_week.sh {
 	# Symbol for calendar week.
 	# export TMUX_POWERLINE_SEG_DATE_WEEK_SYMBOL="󰨳"
 	# export TMUX_POWERLINE_SEG_DATE_WEEK_SYMBOL_COLOUR="255"
+# }
+
+# date.sh {
+	# date(1) format for the date. If you don't, for some reason, like ISO 8601 format you might want to have "%D" or "%m/%d/%Y".
+	export TMUX_POWERLINE_SEG_DATE_FORMAT="%F"
 # }
 
 # disk_usage.sh {
@@ -206,13 +206,12 @@
 # }
 
 # google_cloud.sh {
-	# Which Google Cloud properties to display. Can be {"account", "project", "account_project", "active_config_name"}.
-	# export TMUX_POWERLINE_SEG_GOOGLE_CLOUD_DISPLAY_MODE="project"
+	# Comma-separated list of Google Cloud properties to display. Available values: "account", "project", "active_config_name".
+	export TMUX_POWERLINE_SEG_GOOGLE_CLOUD_PROPERTIES_TO_DISPLAY="project"
 	# The symbol for Google Cloud.
-	# export TMUX_POWERLINE_SEG_GOOGLE_CLOUD_SYMBOL="󱇶 "
-	# The separator to use between Google Cloud account and project. This environment variable is used only when
-	# TMUX_POWERLINE_SEG_GOOGLE_CLOUD_DISPLAY_MODE is set to 'account_project'.
-	# export TMUX_POWERLINE_SEG_GOOGLE_CLOUD_ACCOUNT_PROJECT_SEPARATOR="󰿟"
+	# export TMUX_POWERLINE_SEG_GOOGLE_CLOUD_SYMBOL="󱇶"
+	# The separator to use between properties.
+	# export TMUX_POWERLINE_SEG_GOOGLE_CLOUD_SEPARATOR="󰿟"
 # }
 
 # hostname.sh {
@@ -402,6 +401,13 @@
 # pwd.sh {
 	# Maximum length of output.
 	export TMUX_POWERLINE_SEG_PWD_MAX_LEN="40"
+# }
+
+# tennis.sh {
+	# Optional tennis snapshots; a dedicated FREE Live Tennis API key is sufficient.
+	export TMUX_POWERLINE_SEG_TENNIS_API_KEY=""
+	# Optional player/team name substring, filtered locally without extra requests.
+	# export TMUX_POWERLINE_SEG_TENNIS_PLAYER=""
 # }
 
 # time.sh {
