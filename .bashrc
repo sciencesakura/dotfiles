@@ -65,6 +65,12 @@ export HISTTIMEFORMAT='%F %T '
 export HISTSIZE=131072
 
 #
+# mise
+# https://mise.jdx.dev/
+#
+type mise &>/dev/null && eval "$(mise activate bash)"
+
+#
 # fzf
 #
 export FZF_DEFAULT_OPTS='--cycle --color=fg:#c6c8d1,bg:#161821,hl:#6b7089,fg+:#d2d4de,bg+:#1e2131,hl+:#84a0c6,prompt:#84a0c6,pointer:#91acd1'
