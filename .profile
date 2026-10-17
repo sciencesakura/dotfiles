@@ -106,13 +106,6 @@ __profile__unshiftpath "$GOPATH/bin"
 __profile__source "$OPAMROOT/opam-init/init.sh"
 
 #
-# pyenv
-# https://github.com/pyenv/pyenv
-#
-[ -z "$PYENV_ROOT" ] && export PYENV_ROOT="$HOME/.local/pyenv"
-type pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
-
-#
 # rbenv
 # https://github.com/rbenv/rbenv
 #
