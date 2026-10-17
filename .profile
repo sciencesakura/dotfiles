@@ -143,13 +143,6 @@ __profile__unshiftpath "$CARGO_HOME/bin"
 __profile__source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
 #
-# Volta
-# https://volta.sh/
-#
-[ -z "$VOLTA_HOME" ] && export VOLTA_HOME="$HOME/.local/volta"
-__profile__unshiftpath "$VOLTA_HOME/bin"
-
-#
 # Others
 #
 __profile__source "$HOME/.profile.local"
