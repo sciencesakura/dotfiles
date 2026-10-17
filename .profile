@@ -86,14 +86,6 @@ export LESS='-R --use-color -Dd+r$Du+b'
 type vim >/dev/null 2>&1 && export EDITOR=vim
 
 #
-# Deno
-# https://deno.com/
-#
-[ -z "$DENO_INSTALL" ] && export DENO_INSTALL="$HOME/.local/deno"
-[ -z "$DENO_INSTALL_ROOT" ] && export DENO_INSTALL_ROOT="$DENO_INSTALL/bin"
-__profile__unshiftpath "$DENO_INSTALL_ROOT"
-
-#
 # GHCup
 # https://www.haskell.org/ghcup/
 #
